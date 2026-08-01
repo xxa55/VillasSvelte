@@ -1,4 +1,5 @@
 <script>
+	import { base } from '$app/paths';
 	import VillaCard from '$lib/components/VillaCard.svelte';
 	import { villas } from '$lib/data/catalog.js';
 </script>
@@ -9,7 +10,7 @@
 			<p class="text-uppercase small text-secondary mb-1">Villas</p>
 			<h1 class="display-6 fw-semibold mb-0">Pick a villa</h1>
 		</div>
-		<a class="btn btn-dark" href="/platforms">See platforms</a>
+		<a class="btn btn-dark" href={`${base}/platforms`}>See platforms</a>
 	</div>
 
 	<div class="row g-4">

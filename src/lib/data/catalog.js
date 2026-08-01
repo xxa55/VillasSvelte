@@ -1,3 +1,10 @@
+import { base } from '$app/paths';
+
+/** @param {string} path */
+const withBase = (path) => `${base}${path}`;
+/** @param {string} path */
+const withBaseHref = (path) => `${base}${path}`;
+
 export const villas = [
 	{
 		id: 'villa-a',
@@ -5,10 +12,10 @@ export const villas = [
 		legacyName: 'Villa 1',
 		tagline: 'Pool, BBQ, KTV',
 		features: ['Private pool', '5 bedrooms', 'Kitchen and laundry'],
-		cover: '/img/villa1/swimming_pool.jpg',
+		cover: withBase('/img/villa1/swimming_pool.jpg'),
 		width: 1600,
 		height: 1200,
-		href: '/villas/villa-a',
+		href: withBaseHref('/villas/villa-a'),
 		description:
 			'Welcome to Villa A, a private pool villa with BBQ area, full kitchen, and comfortable rooms for families and groups.',
 		quickInfo: {
@@ -28,12 +35,12 @@ export const villas = [
 			}
 		],
 		gallery: [
-			{ src: '/img/villa1/bedroom1.jpg', alt: 'Villa A bedroom' },
-			{ src: '/img/villa1/kitchen.jpg', alt: 'Villa A kitchen' },
-			{ src: '/img/villa1/bathroom.jpg', alt: 'Villa A bathroom' },
-			{ src: '/img/villa1/slipper.jpg', alt: 'Villa A slippers' },
-			{ src: '/img/villa1/table.jpg', alt: 'Villa A table' },
-			{ src: '/img/villa1/ktv.jpg', alt: 'Villa A KTV room' }
+			{ src: withBase('/img/villa1/bedroom1.jpg'), alt: 'Villa A bedroom' },
+			{ src: withBase('/img/villa1/kitchen.jpg'), alt: 'Villa A kitchen' },
+			{ src: withBase('/img/villa1/bathroom.jpg'), alt: 'Villa A bathroom' },
+			{ src: withBase('/img/villa1/slipper.jpg'), alt: 'Villa A slippers' },
+			{ src: withBase('/img/villa1/table.jpg'), alt: 'Villa A table' },
+			{ src: withBase('/img/villa1/ktv.jpg'), alt: 'Villa A KTV room' }
 		]
 	},
 	{
@@ -42,10 +49,10 @@ export const villas = [
 		legacyName: 'Villa 2',
 		tagline: 'Pool, dining, billiards',
 		features: ['Private pool', '5 bedrooms', 'Large dining area'],
-		cover: '/img/villa2/swimming_pool.jpg',
+		cover: withBase('/img/villa2/swimming_pool.jpg'),
 		width: 1600,
 		height: 1200,
-		href: '/villas/villa-b',
+		href: withBaseHref('/villas/villa-b'),
 		description:
 			'Villa B offers a modern group layout with private pool, billiard area, open living room, and easy hosting for larger stays.',
 		quickInfo: {
@@ -65,12 +72,12 @@ export const villas = [
 			}
 		],
 		gallery: [
-			{ src: '/img/villa2/bedroom1.jpg', alt: 'Villa B bedroom' },
-			{ src: '/img/villa2/living_room.jpg', alt: 'Villa B living room' },
-			{ src: '/img/villa2/bathroom.jpg', alt: 'Villa B bathroom' },
-			{ src: '/img/villa2/parking.jpg', alt: 'Villa B parking area' },
-			{ src: '/img/villa2/billiard_ball.jpg', alt: 'Villa B billiard table' },
-			{ src: '/img/villa2/ktv.jpg', alt: 'Villa B KTV room' }
+			{ src: withBase('/img/villa2/bedroom1.jpg'), alt: 'Villa B bedroom' },
+			{ src: withBase('/img/villa2/living_room.jpg'), alt: 'Villa B living room' },
+			{ src: withBase('/img/villa2/bathroom.jpg'), alt: 'Villa B bathroom' },
+			{ src: withBase('/img/villa2/parking.jpg'), alt: 'Villa B parking area' },
+			{ src: withBase('/img/villa2/billiard_ball.jpg'), alt: 'Villa B billiard table' },
+			{ src: withBase('/img/villa2/ktv.jpg'), alt: 'Villa B KTV room' }
 		]
 	}
 ];
@@ -82,12 +89,12 @@ export const platforms = [
 		region: 'Shared listing',
 		summary: 'One link for Villa A and Villa B.',
 		badge: 'A + B',
-		cover: '/img/platforms/tripcom.webp',
-		thumbnail: '/img/platforms/tripcom.webp',
-		logo: '/img/platforms/tripcom.webp',
+		cover: withBase('/img/platforms/tripcom.webp'),
+		thumbnail: withBase('/img/platforms/tripcom.webp'),
+		logo: withBase('/img/platforms/tripcom.webp'),
 		logoAlt: 'Trip.com logo',
 		brandColor: '#1A4FA3',
-		href: '/platforms',
+		href: withBaseHref('/platforms'),
 		links: [
 			{
 				label: 'Shared Listing',
@@ -102,12 +109,12 @@ export const platforms = [
 		region: 'Separate listings',
 		summary: 'One Airbnb link per villa.',
 		badge: 'A | B',
-		cover: '/img/platforms/airbnb.webp',
-		thumbnail: '/img/platforms/airbnb.webp',
-		logo: '/img/platforms/airbnb.webp',
+		cover: withBase('/img/platforms/airbnb.webp'),
+		thumbnail: withBase('/img/platforms/airbnb.webp'),
+		logo: withBase('/img/platforms/airbnb.webp'),
 		logoAlt: 'Airbnb logo',
 		brandColor: '#FF5A5F',
-		href: '/platforms',
+		href: withBaseHref('/platforms'),
 		links: [
 			{ label: 'Villa A Listing', href: 'https://www.airbnb.com/h/-oasis', variant: 'danger' },
 			{ label: 'Villa B Listing', href: 'https://www.airbnb.com/h/-oasisb', variant: 'outline-danger' }
@@ -119,12 +126,12 @@ export const platforms = [
 		region: 'Separate listings',
 		summary: 'One Booking.com link per villa.',
 		badge: 'A | B',
-		cover: '/img/platforms/booking.webp',
-		thumbnail: '/img/platforms/booking.webp',
-		logo: '/img/platforms/booking.webp',
+		cover: withBase('/img/platforms/booking.webp'),
+		thumbnail: withBase('/img/platforms/booking.webp'),
+		logo: withBase('/img/platforms/booking.webp'),
 		logoAlt: 'Booking.com logo',
 		brandColor: '#003B95',
-		href: '/platforms',
+		href: withBaseHref('/platforms'),
 		links: [
 			{
 				label: 'Villa A Listing',

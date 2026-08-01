@@ -1,6 +1,10 @@
 <script>
+	import { base } from '$app/paths';
 	import VerticalCarousel from '$lib/components/VerticalCarousel.svelte';
 	import { platforms, villas } from '$lib/data/catalog.js';
+
+	/** @param {string} path */
+	const withBase = (path) => `${base}${path}`;
 
 	/** @type {{ src: string; alt: string } | null} */
 	let zoomedImage = $state(null);
@@ -24,25 +28,25 @@
 
 	const heroImages = [
 		{
-			src: '/img/villa1/entrance.jpg',
-			srcWebp: '/img/villa1/entrance.webp',
-			srcSetWebp: '/img/villa1/entrance-640.webp 640w, /img/villa1/entrance-1200.webp 1200w, /img/villa1/entrance.webp 1600w',
+			src: withBase('/img/villa1/entrance.jpg'),
+			srcWebp: withBase('/img/villa1/entrance.webp'),
+			srcSetWebp: `${withBase('/img/villa1/entrance-640.webp')} 640w, ${withBase('/img/villa1/entrance-1200.webp')} 1200w, ${withBase('/img/villa1/entrance.webp')} 1600w`,
 			alt: 'Villa A entrance',
 			width: 1600,
 			height: 1200
 		},
 		{
-			src: '/img/villa1/balcony.jpg',
-			srcWebp: '/img/villa1/balcony.webp',
-			srcSetWebp: '/img/villa1/balcony-640.webp 640w, /img/villa1/balcony-1200.webp 1200w, /img/villa1/balcony.webp 1600w',
+			src: withBase('/img/villa1/balcony.jpg'),
+			srcWebp: withBase('/img/villa1/balcony.webp'),
+			srcSetWebp: `${withBase('/img/villa1/balcony-640.webp')} 640w, ${withBase('/img/villa1/balcony-1200.webp')} 1200w, ${withBase('/img/villa1/balcony.webp')} 1600w`,
 			alt: 'Villa A balcony',
 			width: 1600,
 			height: 1200
 		},
 		{
-			src: '/img/villa1/bbq.jpg',
-			srcWebp: '/img/villa1/bbq.webp',
-			srcSetWebp: '/img/villa1/bbq-640.webp 640w, /img/villa1/bbq-1200.webp 1200w, /img/villa1/bbq.webp 1600w',
+			src: withBase('/img/villa1/bbq.jpg'),
+			srcWebp: withBase('/img/villa1/bbq.webp'),
+			srcSetWebp: `${withBase('/img/villa1/bbq-640.webp')} 640w, ${withBase('/img/villa1/bbq-1200.webp')} 1200w, ${withBase('/img/villa1/bbq.webp')} 1600w`,
 			alt: 'Villa A barbecue area',
 			width: 1600,
 			height: 1200
@@ -91,7 +95,7 @@
 	<nav class="navbar navbar-expand-md bg-white border-bottom">
 		<div class="container py-3">
 			<a class="navbar-brand d-flex align-items-center gap-2" href="#top">
-				<img src="/img/logo-96.webp" alt="Downtown Oasis logo" width="78" height="50" class="brand-logo" />
+				<img src={withBase('/img/logo-96.webp')} alt="Downtown Oasis logo" width="78" height="50" class="brand-logo" />
 				<span>Pattaya Villas</span>
 			</a>
 			<ul class="nav ms-auto gap-2 small">
@@ -113,7 +117,7 @@
 					</p>
 					<div class="d-flex flex-wrap gap-3">
 						<a class="btn btn-primary btn-lg" href="#book">Book your stay</a>
-						<a class="btn btn-outline-dark btn-lg" href="/villas">See villas</a>
+						<a class="btn btn-outline-dark btn-lg" href={`${base}/villas`}>See villas</a>
 					</div>
 				</div>
 			</div>
@@ -190,13 +194,13 @@
 						class="zoom-trigger"
 						ondblclick={() =>
 							openZoom({
-								src: '/img/pattaya-map.jpg',
+								src: withBase('/img/pattaya-map.jpg'),
 								alt: 'Map showing the central Pattaya location'
 							})}
 						aria-label="Double click to zoom the Pattaya map"
 					>
 						<img
-							src="/img/pattaya-map.jpg"
+							src={withBase('/img/pattaya-map.jpg')}
 							alt="Map showing the central Pattaya location"
 							width="1600"
 							height="1200"
@@ -231,7 +235,7 @@
 					items={platforms}
 					accent="platform"
 					actionLabel="Choose"
-					targetHref="/platforms"
+					targetHref={`${base}/platforms`}
 				/>
 			</article>
 		</div>
@@ -242,7 +246,7 @@
 	<div class="container">
 		<div class="row g-4 align-items-center text-center text-lg-start">
 			<div class="col-12 col-lg-4">
-				<img src="/img/logo.webp" alt="Downtown Oasis logo" width="210" height="136" class="footer-logo" />
+				<img src={withBase('/img/logo.webp')} alt="Downtown Oasis logo" width="210" height="136" class="footer-logo" />
 			</div>
 			<section class="col-12 col-lg-4" aria-labelledby="contact-heading">
 				<h2 id="contact-heading" class="h5">Contact</h2>
@@ -259,11 +263,11 @@
 						<button
 							type="button"
 							class="zoom-trigger qr-trigger"
-							ondblclick={() => openZoom({ src: '/img/qr_line.jpg', alt: 'LINE QR code' })}
+							ondblclick={() => openZoom({ src: withBase('/img/qr_line.jpg'), alt: 'LINE QR code' })}
 							aria-label="Double click to zoom the LINE QR code"
 						>
 							<img
-								src="/img/qr_line.jpg"
+								src={withBase('/img/qr_line.jpg')}
 								alt="LINE QR code"
 								width="280"
 								height="280"
@@ -277,11 +281,11 @@
 						<button
 							type="button"
 							class="zoom-trigger qr-trigger"
-							ondblclick={() => openZoom({ src: '/img/qr_wechat.jpg', alt: 'WeChat QR code' })}
+							ondblclick={() => openZoom({ src: withBase('/img/qr_wechat.jpg'), alt: 'WeChat QR code' })}
 							aria-label="Double click to zoom the WeChat QR code"
 						>
 							<img
-								src="/img/qr_wechat.jpg"
+								src={withBase('/img/qr_wechat.jpg')}
 								alt="WeChat QR code"
 								width="280"
 								height="280"

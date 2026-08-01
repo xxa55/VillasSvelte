@@ -1,4 +1,5 @@
 <script>
+	import { base } from '$app/paths';
 	import PlatformButton from '$lib/components/PlatformButton.svelte';
 	import { platforms } from '$lib/data/catalog.js';
 
@@ -36,9 +37,9 @@
 
 <article class="container py-4 py-lg-5">
 	<nav aria-label="Breadcrumb" class="mb-4 small">
-		<a href="/" class="text-decoration-none">Home</a>
+		<a href={base || '/'} class="text-decoration-none">Home</a>
 		<span class="mx-2 text-secondary">/</span>
-		<a href="/villas" class="text-decoration-none">Villas</a>
+		<a href={`${base}/villas`} class="text-decoration-none">Villas</a>
 		<span class="mx-2 text-secondary">/</span>
 		<span aria-current="page">{villa.name}</span>
 	</nav>

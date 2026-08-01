@@ -1,4 +1,5 @@
 <script>
+	import { base } from '$app/paths';
 	import PlatformCard from '$lib/components/PlatformCard.svelte';
 	import Connection from '$lib/components/Connection.svelte';
 	import { businessConnections, platforms } from '$lib/data/catalog.js';
@@ -13,7 +14,7 @@
 				Trip.com is shared. Airbnb splits by villa.
 			</p>
 		</div>
-		<a class="btn btn-outline-dark" href="/villas">See villas</a>
+		<a class="btn btn-outline-dark" href={`${base}/villas`}>See villas</a>
 	</div>
 
 	<div class="row g-4 mb-4">
