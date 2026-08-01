@@ -1,0 +1,27 @@
+:root {
+	--villa-ink: #162c3a;
+	--villa-sand: #f4f0ea;
+	--villa-accent: #1f5d7f;
+}
+
+body {
+	color: var(--villa-ink);
+	background:
+		radial-gradient(circle at 10% 10%, rgb(255 241 218 / 60%), transparent 30%),
+		radial-gradient(circle at 90% 20%, rgb(177 215 243 / 45%), transparent 30%),
+		var(--villa-sand);
+}
+
+.card {
+	border-radius: 1rem;
+}
+
+.btn-primary {
+	background-color: var(--villa-accent);
+	border-color: var(--villa-accent);
+}
+
+.btn-primary:hover {
+	background-color: #194b66;
+	border-color: #194b66;
+}
