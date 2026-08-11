@@ -119,6 +119,12 @@
 						<a class="btn btn-primary btn-lg" href="#book">Book your stay</a>
 						<a class="btn btn-outline-dark btn-lg" href={`${base}/villas`}>See villas</a>
 					</div>
+					<figure class="hero-video mt-4 mb-0">
+						<video class="hero-video-player" controls preload="metadata" playsinline>
+							<source src={withBase('/video/pattaya-villas-compressed.mp4')} type="video/mp4" />
+							Your browser does not support the video tag.
+						</video>
+					</figure>
 				</div>
 			</div>
 			<div class="col-12 col-lg-5">
@@ -355,6 +361,22 @@
 		letter-spacing: 0.12em;
 		text-transform: uppercase;
 		color: #617785;
+	}
+
+	.hero-video {
+		border-radius: 1rem;
+		overflow: hidden;
+		border: 1px solid rgb(19 48 63 / 12%);
+		box-shadow: 0 1rem 2rem rgb(18 37 48 / 10%);
+		background: rgb(255 255 255 / 70%);
+	}
+
+	.hero-video-player {
+		display: block;
+		width: 100%;
+		height: auto;
+		aspect-ratio: 16 / 9;
+		background: #000;
 	}
 
 	h1 {
