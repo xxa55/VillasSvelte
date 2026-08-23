@@ -1,9 +1,9 @@
-import { base } from '$app/paths';
+import { asset, resolve } from '$app/paths';
 
-/** @param {string} path */
-const withBase = (path) => `${base}${path}`;
-/** @param {string} path */
-const withBaseHref = (path) => `${base}${path}`;
+/** @param {Parameters<typeof asset>[0]} path */
+const withBase = (path) => asset(path);
+/** @param {Parameters<typeof resolve>[0]} path */
+const withBaseHref = (path) => resolve(path);
 
 export const villas = [
 	{

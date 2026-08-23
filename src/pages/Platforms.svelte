@@ -1,9 +1,18 @@
 <script>
-	import { base } from '$app/paths';
+	import { resolve } from '$app/paths';
 	import PlatformCard from '$lib/components/PlatformCard.svelte';
 	import Connection from '$lib/components/Connection.svelte';
 	import { businessConnections, platforms } from '$lib/data/catalog.js';
 </script>
+
+<svelte:head>
+	<title>Booking Platforms | Pattaya Villas</title>
+	<meta
+		name="description"
+		content="Book Downtown Oasis villas directly on Airbnb and Booking.com, or find both villas on Trip.com."
+	/>
+	<link rel="canonical" href={`https://www.downtownoasis.net${resolve('/platforms')}`} />
+</svelte:head>
 
 <section class="container py-5">
 	<div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-4">
@@ -14,7 +23,7 @@
 				Trip.com is shared. Airbnb splits by villa.
 			</p>
 		</div>
-		<a class="btn btn-outline-dark" href={`${base}/villas`}>See villas</a>
+		<a class="btn btn-outline-dark" href={resolve('/villas')}>See villas</a>
 	</div>
 
 	<div class="row g-4 mb-4">

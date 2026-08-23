@@ -1,10 +1,10 @@
 <script>
-	import { base } from '$app/paths';
+	import { asset, resolve } from '$app/paths';
 	import VerticalCarousel from '$lib/components/VerticalCarousel.svelte';
 	import { platforms, villas } from '$lib/data/catalog.js';
 
-	/** @param {string} path */
-	const withBase = (path) => `${base}${path}`;
+	/** @param {Parameters<typeof asset>[0]} path */
+	const withBase = (path) => asset(path);
 
 	/** @type {{ src: string; alt: string } | null} */
 	let zoomedImage = $state(null);
@@ -89,6 +89,7 @@
 		name="description"
 		content="Private villas in Pattaya with pool, BBQ, central location, and flexible booking through villa-first or platform-first paths."
 	/>
+	<link rel="canonical" href={`https://www.downtownoasis.net${resolve('/')}`} />
 </svelte:head>
 
 <header class="site-header">
@@ -117,7 +118,7 @@
 					</p>
 					<div class="d-flex flex-wrap gap-3">
 						<a class="btn btn-primary btn-lg" href="#book">Book your stay</a>
-						<a class="btn btn-outline-dark btn-lg" href={`${base}/villas`}>See villas</a>
+						<a class="btn btn-outline-dark btn-lg" href={resolve('/villas')}>See villas</a>
 					</div>
 					<figure class="hero-video mt-4 mb-0">
 						<video class="hero-video-player" controls preload="metadata" playsinline>
@@ -241,7 +242,7 @@
 					items={platforms}
 					accent="platform"
 					actionLabel="Choose"
-					targetHref={`${base}/platforms`}
+					targetHref={resolve('/platforms')}
 				/>
 			</article>
 		</div>

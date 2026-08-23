@@ -10,7 +10,11 @@ const config = {
 			pages: 'build',
 			assets: 'build',
 			fallback: '404.html'
-		})
+		}),
+		paths: {
+			// fixed custom domain root, no need for portable relative paths
+			relative: false
+		}
 	}
 };
 

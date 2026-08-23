@@ -1,5 +1,5 @@
 <script>
-	import { base } from '$app/paths';
+	import { resolve } from '$app/paths';
 	import PlatformButton from '$lib/components/PlatformButton.svelte';
 	import { platforms } from '$lib/data/catalog.js';
 
@@ -33,13 +33,36 @@
 <svelte:head>
 	<title>{villa.name} | Pattaya Villas</title>
 	<meta name="description" content={villa.description} />
+	<link rel="canonical" href={`https://www.downtownoasis.net${villa.href}`} />
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'LodgingBusiness',
+		name: villa.name,
+		description: villa.description,
+		url: `https://www.downtownoasis.net${villa.href}`,
+		image: villa.cover,
+		address: {
+			'@type': 'PostalAddress',
+			addressLocality: 'Pattaya',
+			addressRegion: 'Chon Buri',
+			addressCountry: 'TH'
+		},
+		numberOfRooms: villa.quickInfo?.bedrooms,
+		amenityFeature: villa.quickInfo?.highlights?.map(
+			/** @param {string} h */ (h) => ({
+				'@type': 'LocationFeatureSpecification',
+				name: h,
+				value: true
+			})
+		)
+	})}<\/script>`}
 </svelte:head>
 
 <article class="container py-4 py-lg-5">
 	<nav aria-label="Breadcrumb" class="mb-4 small">
-		<a href={base || '/'} class="text-decoration-none">Home</a>
+		<a href={resolve('/')} class="text-decoration-none">Home</a>
 		<span class="mx-2 text-secondary">/</span>
-		<a href={`${base}/villas`} class="text-decoration-none">Villas</a>
+		<a href={resolve('/villas')} class="text-decoration-none">Villas</a>
 		<span class="mx-2 text-secondary">/</span>
 		<span aria-current="page">{villa.name}</span>
 	</nav>
