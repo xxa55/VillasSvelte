@@ -12,7 +12,7 @@ export const villas = [
 		legacyName: 'Villa 1',
 		tagline: 'Pool, BBQ, KTV',
 		features: ['Private pool', '5 bedrooms', 'Kitchen and laundry'],
-		cover: withBase('/img/villa1/swimming_pool.jpg'),
+		cover: withBase('/img/villa1/swimming_pool.webp'),
 		width: 1600,
 		height: 1200,
 		href: withBaseHref('/villas/villa-a'),
@@ -35,12 +35,12 @@ export const villas = [
 			}
 		],
 		gallery: [
-			{ src: withBase('/img/villa1/bedroom1.jpg'), alt: 'Villa A bedroom' },
-			{ src: withBase('/img/villa1/kitchen.jpg'), alt: 'Villa A kitchen' },
-			{ src: withBase('/img/villa1/bathroom.jpg'), alt: 'Villa A bathroom' },
-			{ src: withBase('/img/villa1/slipper.jpg'), alt: 'Villa A slippers' },
-			{ src: withBase('/img/villa1/table.jpg'), alt: 'Villa A table' },
-			{ src: withBase('/img/villa1/ktv.jpg'), alt: 'Villa A KTV room' }
+			{ src: withBase('/img/villa1/bedroom1.webp'), alt: 'Villa A bedroom' },
+			{ src: withBase('/img/villa1/kitchen.webp'), alt: 'Villa A kitchen' },
+			{ src: withBase('/img/villa1/bathroom.webp'), alt: 'Villa A bathroom' },
+			{ src: withBase('/img/villa1/slipper.webp'), alt: 'Villa A slippers' },
+			{ src: withBase('/img/villa1/table.webp'), alt: 'Villa A table' },
+			{ src: withBase('/img/villa1/ktv.webp'), alt: 'Villa A KTV room' }
 		]
 	},
 	{
@@ -49,7 +49,7 @@ export const villas = [
 		legacyName: 'Villa 2',
 		tagline: 'Pool, dining, billiards',
 		features: ['Private pool', '5 bedrooms', 'Large dining area'],
-		cover: withBase('/img/villa2/swimming_pool.jpg'),
+		cover: withBase('/img/villa2/swimming_pool.webp'),
 		width: 1600,
 		height: 1200,
 		href: withBaseHref('/villas/villa-b'),
@@ -72,12 +72,12 @@ export const villas = [
 			}
 		],
 		gallery: [
-			{ src: withBase('/img/villa2/bedroom1.jpg'), alt: 'Villa B bedroom' },
-			{ src: withBase('/img/villa2/living_room.jpg'), alt: 'Villa B living room' },
-			{ src: withBase('/img/villa2/bathroom.jpg'), alt: 'Villa B bathroom' },
-			{ src: withBase('/img/villa2/parking.jpg'), alt: 'Villa B parking area' },
-			{ src: withBase('/img/villa2/billiard_ball.jpg'), alt: 'Villa B billiard table' },
-			{ src: withBase('/img/villa2/ktv.jpg'), alt: 'Villa B KTV room' }
+			{ src: withBase('/img/villa2/bedroom1.webp'), alt: 'Villa B bedroom' },
+			{ src: withBase('/img/villa2/living_room.webp'), alt: 'Villa B living room' },
+			{ src: withBase('/img/villa2/bathroom.webp'), alt: 'Villa B bathroom' },
+			{ src: withBase('/img/villa2/parking.webp'), alt: 'Villa B parking area' },
+			{ src: withBase('/img/villa2/billiard_ball.webp'), alt: 'Villa B billiard table' },
+			{ src: withBase('/img/villa2/ktv.webp'), alt: 'Villa B KTV room' }
 		]
 	}
 ];

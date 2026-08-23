@@ -28,7 +28,7 @@
 
 	const heroImages = [
 		{
-			src: withBase('/img/villa1/entrance.jpg'),
+			src: withBase('/img/villa1/entrance.webp'),
 			srcWebp: withBase('/img/villa1/entrance.webp'),
 			srcSetWebp: `${withBase('/img/villa1/entrance-640.webp')} 640w, ${withBase('/img/villa1/entrance-1200.webp')} 1200w, ${withBase('/img/villa1/entrance.webp')} 1600w`,
 			alt: 'Villa A entrance',
@@ -36,7 +36,7 @@
 			height: 1200
 		},
 		{
-			src: withBase('/img/villa1/balcony.jpg'),
+			src: withBase('/img/villa1/balcony.webp'),
 			srcWebp: withBase('/img/villa1/balcony.webp'),
 			srcSetWebp: `${withBase('/img/villa1/balcony-640.webp')} 640w, ${withBase('/img/villa1/balcony-1200.webp')} 1200w, ${withBase('/img/villa1/balcony.webp')} 1600w`,
 			alt: 'Villa A balcony',
@@ -44,7 +44,7 @@
 			height: 1200
 		},
 		{
-			src: withBase('/img/villa1/bbq.jpg'),
+			src: withBase('/img/villa1/bbq.webp'),
 			srcWebp: withBase('/img/villa1/bbq.webp'),
 			srcSetWebp: `${withBase('/img/villa1/bbq-640.webp')} 640w, ${withBase('/img/villa1/bbq-1200.webp')} 1200w, ${withBase('/img/villa1/bbq.webp')} 1600w`,
 			alt: 'Villa A barbecue area',
@@ -95,7 +95,7 @@
 	<nav class="navbar navbar-expand-md bg-white border-bottom">
 		<div class="container py-3">
 			<a class="navbar-brand d-flex align-items-center gap-2" href="#top">
-				<img src={withBase('/img/logo-96.webp')} alt="Downtown Oasis logo" width="78" height="50" class="brand-logo" />
+				<img src={withBase('/img/logo.webp')} alt="Downtown Oasis logo" width="120" height="76" class="brand-logo" />
 				<span>Pattaya Villas</span>
 			</a>
 			<ul class="nav ms-auto gap-2 small">
@@ -200,13 +200,13 @@
 						class="zoom-trigger"
 						ondblclick={() =>
 							openZoom({
-								src: withBase('/img/pattaya-map.jpg'),
+								src: withBase('/img/pattaya-map.webp'),
 								alt: 'Map showing the central Pattaya location'
 							})}
 						aria-label="Double click to zoom the Pattaya map"
 					>
 						<img
-							src={withBase('/img/pattaya-map.jpg')}
+							src={withBase('/img/pattaya-map.webp')}
 							alt="Map showing the central Pattaya location"
 							width="1600"
 							height="1200"
@@ -269,11 +269,11 @@
 						<button
 							type="button"
 							class="zoom-trigger qr-trigger"
-							ondblclick={() => openZoom({ src: withBase('/img/qr_line.jpg'), alt: 'LINE QR code' })}
+							ondblclick={() => openZoom({ src: withBase('/img/qr_line.webp'), alt: 'LINE QR code' })}
 							aria-label="Double click to zoom the LINE QR code"
 						>
 							<img
-								src={withBase('/img/qr_line.jpg')}
+								src={withBase('/img/qr_line.webp')}
 								alt="LINE QR code"
 								width="280"
 								height="280"
@@ -287,11 +287,11 @@
 						<button
 							type="button"
 							class="zoom-trigger qr-trigger"
-							ondblclick={() => openZoom({ src: withBase('/img/qr_wechat.jpg'), alt: 'WeChat QR code' })}
+							ondblclick={() => openZoom({ src: withBase('/img/qr_wechat.webp'), alt: 'WeChat QR code' })}
 							aria-label="Double click to zoom the WeChat QR code"
 						>
 							<img
-								src={withBase('/img/qr_wechat.jpg')}
+								src={withBase('/img/qr_wechat.webp')}
 								alt="WeChat QR code"
 								width="280"
 								height="280"
@@ -340,8 +340,12 @@
 	}
 
 	.brand-logo {
+		display: block;
+		height: 48px;
+		width: auto;
+		max-width: 120px;
 		border-radius: 0.55rem;
-		object-fit: cover;
+		object-fit: contain;
 		background: #ffffff;
 		padding: 0.1rem;
 	}
