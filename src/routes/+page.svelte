@@ -1,7 +1,11 @@
 <script>
 	import { asset, resolve } from '$app/paths';
 	import VerticalCarousel from '$lib/components/VerticalCarousel.svelte';
-	import { platforms, villas } from '$lib/data/catalog.js';
+	import { getCatalog } from '$lib/data/catalog.js';
+	import { getCopy, language } from '$lib/i18n.js';
+
+	let c = $derived(getCopy($language).home);
+	let catalog = $derived(getCatalog($language));
 
 	/** @param {Parameters<typeof asset>[0]} path */
 	const withBase = (path) => asset(path);
@@ -53,42 +57,19 @@
 		}
 	];
 
-	const amenities = [
-		{
-			title: 'Private Pool',
-			icon: 'bi bi-water',
-			description: 'Relax in your own private pool and sun deck.'
-		},
-		{
-			title: 'BBQ & Kitchen',
-			icon: 'bi bi-fire',
-			description: 'Outdoor BBQ area and a fully equipped kitchen.'
-		},
-		{
-			title: 'Comfortable Bedrooms',
-			icon: 'bi bi-door-open',
-			description: 'Multiple comfortable bedrooms with privacy.'
-		}
-	];
-
-	const locationPoints = [
-		'Central Pattaya / Beach Road area',
-		'Close to nightlife, dining, and attractions',
-		'Easy pickup and drop-off for guests'
-	];
-
-	const fullAddress = '297, 3, Muang Pattaya, Bang Lamung District, Chon Buri 20150, Thailand';
+	const amenityIcons = ['bi bi-water', 'bi bi-fire', 'bi bi-door-open'];
+	let amenities = $derived(c.amenities.map(
+		/** @param {{ title: string; description: string }} amenity @param {number} index */
+		(amenity, index) => ({ ...amenity, icon: amenityIcons[index] })
+	));
 
 	const googleMapsLink =
 		'https://www.google.com/maps/place/Downtown+Oasis+Pool+Villa+Pattaya+%E5%9F%8E%E5%B8%82%E7%BB%BF%E6%B4%B2+%E5%BA%A6%E5%81%87%E9%85%92%E5%BA%97/@12.9269092,100.8784369,17z/data=!3m1!4b1!4m6!3m5!1s0x310297727deb68f3:0xb7313830ab29e5a6!8m2!3d12.926904!4d100.8810118!16s%2Fg%2F11mczcqfnz?entry=ttu&g_ep=EgoyMDI2MDcyOS4wIKXMDSoASAFQAw%3D%3D';
 </script>
 
 <svelte:head>
-	<title>Pattaya Villas | Private Villas for Rent</title>
-	<meta
-		name="description"
-		content="Private villas in Pattaya with pool, BBQ, central location, and flexible booking through villa-first or platform-first paths."
-	/>
+	<title>{c.title}</title>
+	<meta name="description" content={c.description} />
 	<link rel="canonical" href={`https://www.downtownoasis.net${resolve('/')}`} />
 </svelte:head>
 
@@ -97,12 +78,12 @@
 		<div class="container py-3">
 			<a class="navbar-brand d-flex align-items-center gap-2" href="#top">
 				<img src={withBase('/img/logo.webp')} alt="Downtown Oasis logo" width="120" height="76" class="brand-logo" />
-				<span>Pattaya Villas</span>
+				<span>{c.brand}</span>
 			</a>
 			<ul class="nav ms-auto gap-2 small">
-				<li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-				<li class="nav-item"><a class="nav-link" href="#location">Location</a></li>
-				<li class="nav-item"><a class="nav-link" href="#book">Book</a></li>
+				<li class="nav-item"><a class="nav-link" href="#about">{c.about}</a></li>
+				<li class="nav-item"><a class="nav-link" href="#location">{c.location}</a></li>
+				<li class="nav-item"><a class="nav-link" href="#book">{c.book}</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -111,19 +92,17 @@
 		<div class="row g-4 align-items-stretch">
 			<div class="col-12 col-lg-7">
 				<div class="hero-copy rounded-4 p-4 p-lg-5 h-100">
-					<p class="hero-kicker">Pattaya Villas</p>
-					<h1>Private villas near the beach</h1>
-					<p class="lead mb-4">
-						Pool, BBQ, group-friendly layouts, and flexible booking once you are ready.
-					</p>
+					<p class="hero-kicker">{c.brand}</p>
+					<h1>{c.heroTitle}</h1>
+					<p class="lead mb-4">{c.heroLead}</p>
 					<div class="d-flex flex-wrap gap-3">
-						<a class="btn btn-primary btn-lg" href="#book">Book your stay</a>
-						<a class="btn btn-outline-dark btn-lg" href={resolve('/villas')}>See villas</a>
+						<a class="btn btn-primary btn-lg" href="#book">{c.bookStay}</a>
+						<a class="btn btn-outline-dark btn-lg" href={resolve('/villas')}>{c.seeVillas}</a>
 					</div>
 					<figure class="hero-video mt-4 mb-0">
 						<video class="hero-video-player" controls preload="metadata" playsinline>
 							<source src={withBase('/video/pattaya-villas-compressed.mp4')} type="video/mp4" />
-							Your browser does not support the video tag.
+							{c.videoFallback}
 						</video>
 					</figure>
 				</div>
@@ -155,8 +134,8 @@
 <main>
 	<section class="container py-4 py-lg-5" aria-labelledby="about-heading" id="about">
 		<div class="section-heading text-center mx-auto mb-4">
-			<h2 id="about-heading">Welcome to Our Villas</h2>
-			<p>Choose your stay. Book your way.</p>
+			<h2 id="about-heading">{c.welcome}</h2>
+			<p>{c.welcomeLead}</p>
 		</div>
 
 		<div class="row g-4">
@@ -176,21 +155,19 @@
 		<div class="row align-items-center g-4">
 			<div class="col-12 col-lg-6">
 				<div class="location-copy">
-					<h2 id="location-heading">Where we are</h2>
-					<p>
-						Near the beach, Walking Street, restaurants, and shopping.
-					</p>
-					<div class="location-address-card mb-3" aria-label="Property address">
-						<p class="location-label mb-1">Address</p>
-						<p class="location-address mb-0">{fullAddress}</p>
+					<h2 id="location-heading">{c.where}</h2>
+					<p>{c.whereLead}</p>
+					<div class="location-address-card mb-3" aria-label={c.propertyAddress}>
+						<p class="location-label mb-1">{c.addressLabel}</p>
+						<p class="location-address mb-0">{c.address}</p>
 					</div>
 					<ul class="location-list">
-						{#each locationPoints as point}
+						{#each c.locationPoints as point}
 							<li>{point}</li>
 						{/each}
 					</ul>
 					<a class="btn btn-primary btn-sm mt-2 maps-cta" href={googleMapsLink} target="_blank" rel="noreferrer">
-						Open in Google Maps ↗
+						{c.openMaps}
 					</a>
 				</div>
 			</div>
@@ -202,20 +179,20 @@
 						ondblclick={() =>
 							openZoom({
 								src: withBase('/img/pattaya-map.webp'),
-								alt: 'Map showing the central Pattaya location'
+								alt: c.mapAlt
 							})}
-						aria-label="Double click to zoom the Pattaya map"
+						aria-label={c.mapZoom}
 					>
 						<img
 							src={withBase('/img/pattaya-map.webp')}
-							alt="Map showing the central Pattaya location"
+							alt={c.mapAlt}
 							width="1600"
 							height="1200"
 							loading="lazy"
 							decoding="async"
 						/>
 					</button>
-					<figcaption>Map photo preview. Double-click to enlarge, or open Google Maps.</figcaption>
+					<figcaption>{c.mapCaption}</figcaption>
 				</figure>
 			</div>
 		</div>
@@ -223,26 +200,19 @@
 
 	<section class="container py-4 py-lg-5" aria-labelledby="book-heading" id="book">
 		<div class="section-heading text-center mx-auto mb-4">
-			<h2 id="book-heading">Book your stay</h2>
-			<p>Choose by villa or platform.</p>
+			<h2 id="book-heading">{c.bookHeading}</h2>
+			<p>{c.bookLead}</p>
 		</div>
 
 		<div class="row g-4 align-items-stretch">
-			<article class="col-12 col-lg-6">
+			<article class="col-12">
 				<VerticalCarousel
-					title="Villas"
-					items={villas}
+					title={c.villas}
+					items={catalog.villas}
 					accent="villa"
-					actionLabel="Choose"
-				/>
-			</article>
-			<article class="col-12 col-lg-6">
-				<VerticalCarousel
-					title="Platforms"
-					items={platforms}
-					accent="platform"
-					actionLabel="Choose"
-					targetHref={resolve('/platforms')}
+					actionLabel={c.choose}
+					previousLabel={c.previous ?? ($language === 'zh-CN' ? '上一个' : 'Previous')}
+					nextLabel={c.next ?? ($language === 'zh-CN' ? '下一个' : 'Next')}
 				/>
 			</article>
 		</div>
@@ -256,22 +226,22 @@
 				<img src={withBase('/img/logo.webp')} alt="Downtown Oasis logo" width="210" height="136" class="footer-logo" />
 			</div>
 			<section class="col-12 col-lg-4" aria-labelledby="contact-heading">
-				<h2 id="contact-heading" class="h5">Contact</h2>
+				<h2 id="contact-heading" class="h5">{c.contact}</h2>
 				<address class="mb-0">
 					<p><a href="tel:+66638855168">+66 63 885 5168</a></p>
 					<p><a href="mailto:oasis55168@gmail.com">oasis55168@gmail.com</a></p>
-					<p class="mb-0">Pattaya, Thailand</p>
+					<p class="mb-0">{c.place}</p>
 				</address>
 			</section>
 			<section class="col-12 col-lg-4" aria-labelledby="connect-heading">
-				<h2 id="connect-heading" class="h5">Connect</h2>
+				<h2 id="connect-heading" class="h5">{c.connect}</h2>
 				<div class="d-flex justify-content-center justify-content-lg-start gap-3 flex-wrap">
 					<figure class="qr-figure mb-0">
 						<button
 							type="button"
 							class="zoom-trigger qr-trigger"
 							ondblclick={() => openZoom({ src: withBase('/img/qr_line.webp'), alt: 'LINE QR code' })}
-							aria-label="Double click to zoom the LINE QR code"
+							aria-label={`${c.zoomQr}：LINE`}
 						>
 							<img
 								src={withBase('/img/qr_line.webp')}
@@ -289,7 +259,7 @@
 							type="button"
 							class="zoom-trigger qr-trigger"
 							ondblclick={() => openZoom({ src: withBase('/img/qr_wechat.webp'), alt: 'WeChat QR code' })}
-							aria-label="Double click to zoom the WeChat QR code"
+							aria-label={`${c.zoomQr}：WeChat`}
 						>
 							<img
 								src={withBase('/img/qr_wechat.webp')}
@@ -303,6 +273,15 @@
 						<figcaption>WeChat</figcaption>
 					</figure>
 				</div>
+				<nav class="platform-links mt-3" aria-label={c.platforms}>
+					{#each catalog.platforms as platform}
+						<a class="platform-mini-card" href={`${resolve('/platforms')}#platform-${platform.id}`}>
+							<img src={platform.logo} alt="" width="28" height="28" loading="lazy" />
+							<span>{platform.name}</span>
+							<i class="bi bi-chevron-right" aria-hidden="true"></i>
+						</a>
+					{/each}
+				</nav>
 			</section>
 		</div>
 	</div>
@@ -318,7 +297,7 @@
 		onclick={closeZoom}
 		onkeydown={onLightboxKeydown}
 	>
-		<button type="button" class="lightbox-close" onclick={closeZoom} aria-label="Close image preview">
+		<button type="button" class="lightbox-close" onclick={closeZoom} aria-label={c.closePreview}>
 			×
 		</button>
 		<img class="lightbox-image" src={zoomedImage.src} alt={zoomedImage.alt} />
@@ -546,6 +525,56 @@
 		margin-top: 0.5rem;
 		font-size: 0.9rem;
 		text-align: center;
+	}
+
+	.platform-links {
+		display: grid;
+		gap: 0.45rem;
+		max-width: 18rem;
+		margin-inline: auto;
+	}
+
+	.platform-mini-card {
+		display: grid;
+		grid-template-columns: 1.75rem 1fr auto;
+		align-items: center;
+		gap: 0.6rem;
+		padding: 0.48rem 0.6rem;
+		border: 1px solid rgb(19 48 63 / 10%);
+		border-radius: 0.65rem;
+		background: rgb(255 255 255 / 48%);
+		color: #526b79;
+		font-size: 0.84rem;
+		font-weight: 600;
+		text-decoration: none;
+		transition: border-color 150ms ease, background-color 150ms ease, transform 150ms ease;
+	}
+
+	.platform-mini-card img {
+		width: 1.75rem;
+		height: 1.75rem;
+		border-radius: 0.4rem;
+		object-fit: contain;
+		background: #fff;
+	}
+
+	.platform-mini-card i {
+		font-size: 0.7rem;
+		opacity: 0.55;
+	}
+
+	.platform-mini-card:hover,
+	.platform-mini-card:focus-visible {
+		color: #1f5d7f;
+		border-color: rgb(31 93 127 / 28%);
+		background: rgb(255 255 255 / 82%);
+		transform: translateY(-1px);
+	}
+
+	@media (min-width: 992px) {
+		.platform-links {
+			margin-inline: 0;
+		}
 	}
 
 	address p {

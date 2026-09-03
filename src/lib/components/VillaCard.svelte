@@ -1,5 +1,5 @@
 <script>
-	let { villa } = $props();
+	let { villa, exploreLabel = 'Explore' } = $props();
 </script>
 
 <article class="card h-100 shadow-sm border-0 villa-card">
@@ -14,7 +14,7 @@
 				<li class="list-group-item px-0">{feature}</li>
 			{/each}
 		</ul>
-		<a class="btn btn-outline-dark mt-auto" href={villa.href}>Explore {villa.name}</a>
+		<a class="btn btn-outline-dark mt-auto" href={villa.href}>{exploreLabel} {villa.name}</a>
 	</div>
 </article>
 

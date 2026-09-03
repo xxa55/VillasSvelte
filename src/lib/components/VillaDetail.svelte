@@ -1,37 +1,40 @@
 <script>
 	import { resolve } from '$app/paths';
 	import PlatformButton from '$lib/components/PlatformButton.svelte';
-	import { platforms } from '$lib/data/catalog.js';
+	import { getCatalog } from '$lib/data/catalog.js';
+	import { getCopy, language } from '$lib/i18n.js';
 
-	let { villa } = $props();
+	let { villa: sourceVilla } = $props();
+	let c = $derived(getCopy($language).villaDetail);
+	let villa = $derived(getCatalog($language).villas.find((item) => item.id === sourceVilla.id) ?? sourceVilla);
 
-	const bookingPlatforms = platforms
-		.map((platform) => {
+	let bookingPlatforms = $derived.by(() =>
+		getCatalog($language).platforms.map((platform) => {
 			const platformLinks =
 				platform.id === 'trip'
 					? platform.links
-					: platform.links.filter((link) => link.label.includes(villa.name));
+					: platform.links.filter((link, index) => (('villaId' in link ? link.villaId : null) ?? (index === 0 ? 'villa-a' : 'villa-b')) === villa.id);
 
 			return {
 				id: platform.id,
 				name: platform.name,
-				badge: platform.id === 'trip' ? 'Shared listing' : platform.region,
-				kicker: platform.id === 'trip' ? 'Both villas' : villa.name,
+				badge: platform.id === 'trip' ? c.sharedListing : platform.region,
+				kicker: platform.id === 'trip' ? c.bothVillas : villa.name,
 				thumbnail: platform.thumbnail,
 				logo: platform.logo,
 				logoAlt: platform.logoAlt,
 				summary:
 					platform.id === 'trip'
-						? 'Shared listing for both villas.'
-						: `Direct ${platform.name} listing for ${villa.name}.`,
+						? c.sharedSummary
+						: c.directListing.replace('{platform}', platform.name).replace('{villa}', villa.name),
 				links: platformLinks
 			};
-		})
-		.filter((platform) => platform.links.length > 0);
+		}).filter((platform) => platform.links.length > 0)
+	);
 </script>
 
 <svelte:head>
-	<title>{villa.name} | Pattaya Villas</title>
+	<title>{villa.name} | {c.siteName}</title>
 	<meta name="description" content={villa.description} />
 	<link rel="canonical" href={`https://www.downtownoasis.net${villa.href}`} />
 	{@html `<script type="application/ld+json">${JSON.stringify({
@@ -59,10 +62,10 @@
 </svelte:head>
 
 <article class="container py-4 py-lg-5">
-	<nav aria-label="Breadcrumb" class="mb-4 small">
-		<a href={resolve('/')} class="text-decoration-none">Home</a>
+	<nav aria-label={c.breadcrumb ?? ($language === 'zh-CN' ? '页面路径' : 'Breadcrumb')} class="mb-4 small">
+		<a href={resolve('/')} class="text-decoration-none">{c.home}</a>
 		<span class="mx-2 text-secondary">/</span>
-		<a href={resolve('/villas')} class="text-decoration-none">Villas</a>
+		<a href={resolve('/villas')} class="text-decoration-none">{c.villas}</a>
 		<span class="mx-2 text-secondary">/</span>
 		<span aria-current="page">{villa.name}</span>
 	</nav>
@@ -70,7 +73,7 @@
 	<header class="villa-hero mb-4">
 		<img
 			src={villa.cover}
-			alt={`${villa.name} swimming pool`}
+			alt={`${villa.name} ${c.poolAlt}`}
 			width={villa.width}
 			height={villa.height}
 			class="img-fluid rounded-4 shadow-sm"
@@ -86,7 +89,7 @@
 			<p class="lead text-secondary">{villa.description}</p>
 
 			<section aria-labelledby="amenities-heading" class="mb-4">
-				<h2 id="amenities-heading" class="h4">Amenities</h2>
+				<h2 id="amenities-heading" class="h4">{c.amenities}</h2>
 				<ul class="ps-3 mb-0">
 					{#each villa.features as feature}
 						<li>{feature}</li>
@@ -94,36 +97,36 @@
 				</ul>
 			</section>
 
-			<a class="btn btn-dark mt-4" href="#booking-section">Ready to book</a>
+			<a class="btn btn-dark mt-4" href="#booking-section">{c.ready}</a>
 		</section>
 
 		<aside class="col-12 col-lg-4" aria-labelledby="quick-info-heading">
 			<div class="card border-0 shadow-sm quick-info-card">
 				<div class="card-body">
-					<h2 id="quick-info-heading" class="h4">Quick Info</h2>
+					<h2 id="quick-info-heading" class="h4">{c.quickInfo}</h2>
 					<dl class="quick-info-list mb-0">
 						<div>
-							<dt>Guests</dt>
+							<dt>{c.guests}</dt>
 							<dd>{villa.quickInfo.guests}</dd>
 						</div>
 						<div>
-							<dt>Bedrooms</dt>
+							<dt>{c.bedrooms}</dt>
 							<dd>{villa.quickInfo.bedrooms}</dd>
 						</div>
 						<div>
-							<dt>Bathrooms</dt>
+							<dt>{c.bathrooms}</dt>
 							<dd>{villa.quickInfo.bathrooms}</dd>
 						</div>
 						<div>
-							<dt>Location</dt>
+							<dt>{c.location}</dt>
 							<dd>{villa.quickInfo.location}</dd>
 						</div>
 						<div>
-							<dt>Booking</dt>
+							<dt>{c.booking}</dt>
 							<dd>{villa.quickInfo.booking}</dd>
 						</div>
 						<div>
-							<dt>Highlights</dt>
+							<dt>{c.highlights}</dt>
 							<dd>{villa.quickInfo.highlights.join(', ')}</dd>
 						</div>
 					</dl>
@@ -135,12 +138,12 @@
 	<section aria-labelledby="booking-heading" class="mt-5" id="booking-section">
 		<div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-3">
 			<div>
-				<h2 id="booking-heading" class="h3 mb-1">Choose your platform</h2>
-				<p class="text-secondary mb-0">Trip.com is shared. Airbnb and Booking.com are villa-specific.</p>
+				<h2 id="booking-heading" class="h3 mb-1">{c.choosePlatform}</h2>
+				<p class="text-secondary mb-0">{c.platformLead}</p>
 			</div>
 		</div>
 
-		<div class="row g-3" aria-label={`Booking platforms for ${villa.name}`}>
+		<div class="row g-3" aria-label={`${c.bookingAria} ${villa.name}`}>
 			{#each bookingPlatforms as platform}
 				<section class="col-12 col-lg-4" aria-labelledby={`${villa.id}-${platform.name}`}>
 					<article class="booking-option card border-0 shadow-sm h-100" data-platform={platform.id}>
@@ -177,7 +180,7 @@
 	</section>
 
 	<section aria-labelledby="gallery-title" class="mt-5">
-		<h2 id="gallery-title" class="h3 mb-3">Gallery</h2>
+		<h2 id="gallery-title" class="h3 mb-3">{c.gallery}</h2>
 		<div class="row g-3">
 			{#each villa.gallery as image}
 				<figure class="col-6 col-md-4 mb-0">

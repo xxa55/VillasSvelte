@@ -1,5 +1,5 @@
 <script>
-	let { title, items, accent = 'villa', actionLabel = 'Open', targetHref = '' } = $props();
+	let { title, items, accent = 'villa', actionLabel = 'Open', targetHref = '', previousLabel = 'Previous', nextLabel = 'Next' } = $props();
 
 	let index = $state(0);
 
@@ -19,10 +19,10 @@
 	<div class="chooser-top d-flex align-items-center justify-content-between">
 		<h2 class="h5 mb-0">{title}</h2>
 		<div class="d-flex gap-2">
-			<button class="btn btn-sm btn-light border" type="button" aria-label={`Previous ${title}`} onclick={() => step(-1)}>
+			<button class="btn btn-sm btn-light border" type="button" aria-label={`${previousLabel} ${title}`} onclick={() => step(-1)}>
 				↑
 			</button>
-			<button class="btn btn-sm btn-light border" type="button" aria-label={`Next ${title}`} onclick={() => step(1)}>
+			<button class="btn btn-sm btn-light border" type="button" aria-label={`${nextLabel} ${title}`} onclick={() => step(1)}>
 				↓
 			</button>
 		</div>
