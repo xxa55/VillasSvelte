@@ -2,7 +2,6 @@ import { writable } from 'svelte/store';
 
 export const supportedLanguages = [
 	{ code: 'en', label: 'English' },
-	{ code: 'th', label: 'ไทย' },
 	{ code: 'zh-CN', label: '简体中文' }
 ];
 
@@ -11,9 +10,12 @@ export const language = writable('en');
 export const copy = {
 	en: {
 		language: { label: 'Language' },
+		account: { signIn: 'Sign in', signOut: 'Sign out' },
+		auth: { title: 'Sign in | Downtown Oasis', eyebrow: 'Guest account', heading: 'Sign in to book.', lead: 'Use one account for booking requests, booking history, and villa comments.', email: 'Email', password: 'Password', signIn: 'Sign in', createAccount: 'Create account', continueGoogle: 'Continue with Google' },
+		comments: { eyebrow: 'Guest reviews', heading: 'Notes from our guests.', rating: 'Your rating', star: 'star', stars: 'stars', placeholder: 'Share a helpful comment about your stay', post: 'Post review', checkingAuth: 'Checking your sign-in status. Please try again.', guest: 'Guest', thanks: 'Thank you for sharing your experience.', outOfFive: 'out of 5 stars', empty: 'No reviews yet. Be the first to share your stay.' },
 		home: {
 			title: 'Pattaya Villas | Private Villas for Rent',
-			description: 'Private villas in Pattaya with pool, BBQ, central location, and flexible booking through villa-first or platform-first paths.',
+			description: 'Private villas in Pattaya with pools, BBQ areas, a central location, and secure direct booking.',
 			brand: 'Pattaya Villas', about: 'About', location: 'Location', book: 'Book',
 			heroTitle: 'Private villas near the beach',
 			heroLead: 'Pool, BBQ, group-friendly layouts, and flexible booking once you are ready.',
@@ -29,12 +31,12 @@ export const copy = {
 			locationPoints: ['Central Pattaya / Beach Road area', 'Close to nightlife, dining, and attractions', 'Easy pickup and drop-off for guests'],
 			openMaps: 'Open in Google Maps ↗', propertyAddress: 'Property address', mapAlt: 'Map showing the central Pattaya location',
 			mapZoom: 'Double click to zoom the Pattaya map', mapCaption: 'Map preview. Double-click to enlarge, or open Google Maps.',
-			bookHeading: 'Book your stay', bookLead: 'Choose by villa or platform.', villas: 'Villas', platforms: 'Platforms', choose: 'Choose',
+			bookHeading: 'Book your stay', bookLead: 'Choose a villa, select your dates, and book directly.', villas: 'Villas', platforms: 'Platforms', choose: 'Choose',
 			contact: 'Contact', connect: 'Connect', place: 'Pattaya, Thailand', closePreview: 'Close image preview', zoomQr: 'Double click to zoom the QR code',
 			previous: 'Previous', next: 'Next'
 		},
 		villasPage: {
-			title: 'Villas | Pattaya Villas', description: 'Browse Villa A and Villa B, private pool villas in central Pattaya with BBQ, KTV, and flexible direct or platform booking.',
+			title: 'Villas | Pattaya Villas', description: 'Browse Villa A and Villa B, private pool villas in central Pattaya with BBQ, KTV, and secure direct booking.',
 			label: 'Villas', heading: 'Pick a villa', seePlatforms: 'See platforms', explore: 'Explore'
 		},
 		platformsPage: {
@@ -46,51 +48,26 @@ export const copy = {
 			siteName: 'Pattaya Villas', home: 'Home', villas: 'Villas', poolAlt: 'swimming pool', amenities: 'Amenities', ready: 'Ready to book',
 			quickInfo: 'Quick Info', guests: 'Guests', bedrooms: 'Bedrooms', bathrooms: 'Bathrooms', location: 'Location', booking: 'Booking', highlights: 'Highlights',
 			choosePlatform: 'Choose your platform', platformLead: 'Trip.com is shared. Airbnb and Booking.com are villa-specific.', bookingAria: 'Booking platforms for', gallery: 'Gallery',
-			sharedListing: 'Shared listing', separateListings: 'Separate listings', bothVillas: 'Both villas', sharedSummary: 'Shared listing for both villas.', directListing: 'Direct {platform} listing for {villa}.', breadcrumb: 'Breadcrumb'
-		}
-	},
-	th: {
-		language: { label: 'ภาษา' },
-		home: {
-			title: 'พูลวิลล่าพัทยา | บ้านพักส่วนตัวให้เช่า',
-			description: 'พูลวิลล่าส่วนตัวใจกลางพัทยา พร้อมพื้นที่บาร์บีคิว ห้องครัว และช่องทางการจองที่ยืดหยุ่น',
-			brand: 'พูลวิลล่าพัทยา', about: 'เกี่ยวกับเรา', location: 'ที่ตั้ง', book: 'จองที่พัก',
-			heroTitle: 'พูลวิลล่าส่วนตัวใกล้ชายหาด',
-			heroLead: 'สระว่ายน้ำ บาร์บีคิว พื้นที่เหมาะสำหรับกลุ่ม และช่องทางการจองที่สะดวก',
-			bookStay: 'จองที่พัก', seeVillas: 'ดูวิลล่า', videoFallback: 'เบราว์เซอร์ของคุณไม่รองรับวิดีโอ',
-			welcome: 'ยินดีต้อนรับสู่วิลล่าของเรา', welcomeLead: 'เลือกที่พักและจองในแบบที่คุณสะดวก',
-			amenities: [
-				{ title: 'สระว่ายน้ำส่วนตัว', description: 'ผ่อนคลายในสระว่ายน้ำและพื้นที่อาบแดดส่วนตัว' },
-				{ title: 'บาร์บีคิวและห้องครัว', description: 'มีพื้นที่บาร์บีคิวกลางแจ้งและห้องครัวพร้อมอุปกรณ์ครบครัน' },
-				{ title: 'ห้องนอนแสนสบาย', description: 'ห้องนอนหลายห้องที่สะดวกสบายและเป็นส่วนตัว' }
-			],
-			where: 'ที่ตั้งของเรา', whereLead: 'ใกล้ชายหาด ถนนคนเดิน ร้านอาหาร และแหล่งช้อปปิ้ง',
-			addressLabel: 'ที่อยู่', address: '297/3 เมืองพัทยา อำเภอบางละมุง จังหวัดชลบุรี 20150 ประเทศไทย',
-			locationPoints: ['ใจกลางพัทยา ใกล้ถนนเลียบชายหาด', 'ใกล้สถานบันเทิง ร้านอาหาร และสถานที่ท่องเที่ยว', 'สะดวกสำหรับการรับส่งผู้เข้าพัก'],
-			openMaps: 'เปิดใน Google Maps ↗', propertyAddress: 'ที่อยู่วิลล่า', mapAlt: 'แผนที่แสดงที่ตั้งใจกลางพัทยา',
-			mapZoom: 'ดับเบิลคลิกเพื่อขยายแผนที่พัทยา', mapCaption: 'ตัวอย่างแผนที่ ดับเบิลคลิกเพื่อขยาย หรือเปิดใน Google Maps',
-			bookHeading: 'จองที่พัก', bookLead: 'เลือกตามวิลล่าหรือแพลตฟอร์ม', villas: 'วิลล่า', platforms: 'แพลตฟอร์ม', choose: 'เลือก',
-			contact: 'ติดต่อเรา', connect: 'ช่องทางออนไลน์', place: 'พัทยา ประเทศไทย', closePreview: 'ปิดตัวอย่างรูปภาพ', zoomQr: 'ดับเบิลคลิกเพื่อขยายคิวอาร์โค้ด',
-			previous: 'ก่อนหน้า', next: 'ถัดไป'
+			sharedListing: 'Shared listing', separateListings: 'Separate listings', bothVillas: 'Both villas', sharedSummary: 'Shared listing for both villas.', directListing: 'Direct {platform} listing for {villa}.', breadcrumb: 'Breadcrumb', scrollMore: 'Scroll to see more photos'
 		},
-		villasPage: {
-			title: 'วิลล่า | พูลวิลล่าพัทยา', description: 'เลือกชมวิลล่า A และวิลล่า B พูลวิลล่าส่วนตัวใจกลางพัทยา พร้อมบาร์บีคิว คาราโอเกะ และช่องทางการจองที่ยืดหยุ่น',
-			label: 'วิลล่า', heading: 'เลือกวิลล่าของคุณ', seePlatforms: 'ดูแพลตฟอร์มการจอง', explore: 'ดูรายละเอียด'
+		bookingPanel: {
+			eyebrow: 'Direct booking', heading: 'Request your stay.', lead: 'Book directly and save ฿1,000 per day. A non-refundable $100 USD deposit (approximately ฿3,300) is required to confirm your booking. We will let you know whether your booking is successful. If we cannot confirm it, we will contact you to return your deposit.',
+			checkIn: 'Check in', checkOut: 'Check out', selectDate: 'Click a date below', selectLaterDate: 'Click a later date below', selectCheckInFirst: 'Select check-in first', request: 'Request booking', sending: 'Sending request...',
+			calendarFor: 'Select dates for {villa}', calendarHeading: 'Choose your dates on this calendar', stepOne: 'Click your check-in date', stepTwo: 'Click your check-out date', previousMonth: 'Previous month', nextMonth: 'Next month', booked: 'Booked', unavailable: 'unavailable', available: 'available',
+			checkingAuth: 'Checking your sign-in status. Please try again.', chooseDates: 'Choose available check-in and check-out dates.', chooseCheckOut: 'Now choose your check-out date.', bookedDates: 'Those dates include booked dates. Please choose another stay.'
 		},
-		platformsPage: {
-			title: 'แพลตฟอร์มการจอง | พูลวิลล่าพัทยา', description: 'จองวิลล่าดาวน์ทาวน์โอเอซิสผ่าน Airbnb และ Booking.com หรือดูวิลล่าทั้งสองหลังบน Trip.com',
-			label: 'แพลตฟอร์มการจอง', heading: 'เลือกแพลตฟอร์ม', lead: 'Trip.com ใช้หน้ารวม ส่วน Airbnb แยกหน้าตามวิลล่า', seeVillas: 'ดูวิลล่า',
-			relationship: 'ความเชื่อมโยงของช่องทางการจอง', relationshipLead: 'Trip.com เชื่อมไปยังวิลล่าทั้งสองหลังในหน้ารวม ส่วน Airbnb มีหน้ารายการแยกสำหรับแต่ละวิลล่า'
-		},
-		villaDetail: {
-			siteName: 'พูลวิลล่าพัทยา', home: 'หน้าแรก', villas: 'วิลล่า', poolAlt: 'สระว่ายน้ำ', amenities: 'สิ่งอำนวยความสะดวก', ready: 'พร้อมจอง',
-			quickInfo: 'ข้อมูลโดยย่อ', guests: 'ผู้เข้าพัก', bedrooms: 'ห้องนอน', bathrooms: 'ห้องน้ำ', location: 'ที่ตั้ง', booking: 'การจอง', highlights: 'จุดเด่น',
-			choosePlatform: 'เลือกแพลตฟอร์มการจอง', platformLead: 'Trip.com เป็นหน้ารวม ส่วน Airbnb และ Booking.com แยกตามวิลล่า', bookingAria: 'แพลตฟอร์มการจองสำหรับ', gallery: 'แกลเลอรี',
-			sharedListing: 'รายการรวม', separateListings: 'รายการแยก', bothVillas: 'วิลล่าทั้งสองหลัง', sharedSummary: 'รายการรวมสำหรับวิลล่าทั้งสองหลัง', directListing: 'รายการ {villa} โดยตรงบน {platform}', breadcrumb: 'เส้นทางนำทาง'
+		payment: {
+			title: 'Payment | Downtown Oasis', description: 'PromptPay instructions for your Downtown Oasis booking request.', requestReceived: 'Booking request received', heading: 'Complete your deposit', lead: 'Transfer the non-refundable $100 USD deposit, approximately ฿3,300, using PromptPay. We will let you know whether your booking is successful.',
+			staySummary: '{villa}: {checkIn} to {checkOut}', promptPay: 'PromptPay', scanHeading: 'Scan to transfer', scanLead: 'Use your banking app to scan the QR code. Keep your transfer confirmation until we confirm your booking.', qrAlt: 'PromptPay QR code for the booking deposit',
+			accountVerification: 'Account verification', accountHeading: 'Company account', accountLead: 'Confirm the recipient details in your banking app before transferring.', accountAlt: 'Downtown Oasis company account document',
+			receiptReceived: 'Receipt received', reviewHeading: 'We are reviewing your booking request.', reviewLead: 'We received your payment photo and will contact you after review.', finalStep: 'Final step', uploadHeading: 'Upload your payment photo', uploadLead: 'Upload a clear screenshot or photo of your PromptPay transfer so we can review your booking request.', paymentPhoto: 'Payment photo', uploading: 'Uploading...', submitPhoto: 'Submit payment photo', uploadFailed: 'Your payment photo could not be submitted. Please try again.', missingBooking: 'Your booking reference is missing. Return to the villa page and submit your request again.', returnToVilla: 'Return to villa'
 		}
 	},
 	'zh-CN': {
 		language: { label: '语言' },
+		account: { signIn: '登录', signOut: '退出登录' },
+		auth: { title: '登录 | 芭提雅城市绿洲', eyebrow: '住客账户', heading: '登录后即可预订', lead: '使用同一账户提交预订申请、查看预订记录和发布别墅评价。', email: '邮箱', password: '密码', signIn: '登录', createAccount: '创建账户', continueGoogle: '使用 Google 继续' },
+		comments: { eyebrow: '住客评价', heading: '住客留言', rating: '您的评分', star: '星', stars: '星', placeholder: '分享您入住期间的体验', post: '发布评价', checkingAuth: '正在检查登录状态，请稍后重试。', guest: '住客', thanks: '感谢您分享入住体验。', outOfFive: '满分 5 星', empty: '暂无评价，欢迎成为第一位分享入住体验的住客。' },
 		home: {
 			title: '芭提雅城市绿洲泳池别墅 | 私人泳池度假住宿',
 			description: '位于芭提雅市中心的私人泳池别墅，配有烧烤区和厨房，可通过多种预订平台灵活预订。',
@@ -109,7 +86,7 @@ export const copy = {
 			locationPoints: ['位于芭提雅市中心及海滩路附近', '邻近夜生活区、餐厅和热门景点', '方便客人上下车及接送'],
 			openMaps: '在 Google 地图中查看 ↗', propertyAddress: '别墅地址', mapAlt: '芭提雅市中心位置地图',
 			mapZoom: '双击放大芭提雅位置地图', mapCaption: '位置地图预览。双击可放大，或在 Google 地图中查看。',
-			bookHeading: '预订住宿', bookLead: '您可以按别墅或预订平台进行选择。', villas: '别墅', platforms: '预订平台', choose: '查看并选择',
+			bookHeading: '预订住宿', bookLead: '选择别墅和日期，然后直接预订。', villas: '别墅', platforms: '预订平台', choose: '查看并选择',
 			contact: '联系我们', connect: '社交平台', place: '泰国芭提雅', closePreview: '关闭图片预览', zoomQr: '双击放大二维码',
 			previous: '上一个', next: '下一个'
 		},
@@ -126,10 +103,22 @@ export const copy = {
 			siteName: '芭提雅城市绿洲', home: '首页', villas: '别墅', poolAlt: '私人泳池', amenities: '设施与服务', ready: '开始预订',
 			quickInfo: '基本信息', guests: '可住人数', bedrooms: '卧室', bathrooms: '浴室', location: '位置', booking: '预订方式', highlights: '特色设施',
 			choosePlatform: '选择预订平台', platformLead: 'Trip.com 为两栋别墅的共享页面；Airbnb 和 Booking.com 提供各栋别墅的独立房源页面。', bookingAria: '预订平台：', gallery: '图片展示',
-			sharedListing: '共享房源', separateListings: '独立房源', bothVillas: '两栋别墅', sharedSummary: '此房源页面同时展示A栋和B栋别墅。', directListing: '在 {platform} 查看并预订{villa}。', breadcrumb: '页面路径'
+			sharedListing: '共享房源', separateListings: '独立房源', bothVillas: '两栋别墅', sharedSummary: '此房源页面同时展示A栋和B栋别墅。', directListing: '在 {platform} 查看并预订{villa}。', breadcrumb: '页面路径', scrollMore: '横向滑动查看更多照片'
+		},
+		bookingPanel: {
+			eyebrow: '直接预订', heading: '提交入住申请', lead: '直接预订，每天可节省 ฿1,000。确认预订需支付不可退款的 100 美元定金（约 ฿3,300）。我们将通知您预订是否成功；如无法确认预订，我们会联系您退还定金。',
+			checkIn: '入住日期', checkOut: '退房日期', selectDate: '请在下方选择日期', selectLaterDate: '请选择之后的日期', selectCheckInFirst: '请先选择入住日期', request: '提交预订申请', sending: '正在提交申请...',
+			calendarFor: '选择 {villa} 的日期', calendarHeading: '请在日历上选择入住日期', stepOne: '选择入住日期', stepTwo: '选择退房日期', previousMonth: '上个月', nextMonth: '下个月', booked: '已预订', unavailable: '不可用', available: '可预订',
+			checkingAuth: '正在检查登录状态，请稍后重试。', chooseDates: '请选择可用的入住和退房日期。', chooseCheckOut: '现在请选择退房日期。', bookedDates: '所选日期包含已预订日期，请选择其他日期。'
+		},
+		payment: {
+			title: '付款 | 芭提雅城市绿洲', description: '芭提雅城市绿洲预订申请的 PromptPay 付款说明。', requestReceived: '已收到预订申请', heading: '完成定金支付', lead: '请通过 PromptPay 支付不可退款的 100 美元定金，约合 ฿3,300。我们将通知您预订是否成功。',
+			staySummary: '{villa}：{checkIn} 至 {checkOut}', promptPay: 'PromptPay', scanHeading: '扫码转账', scanLead: '请使用您的银行应用扫描二维码。请保留转账凭证，直至我们确认您的预订。', qrAlt: '预订定金 PromptPay 二维码',
+			accountVerification: '账户核验', accountHeading: '公司账户', accountLead: '转账前，请在您的银行应用中确认收款人信息。', accountAlt: '芭提雅城市绿洲公司账户文件',
+			receiptReceived: '已收到付款凭证', reviewHeading: '我们正在审核您的预订申请。', reviewLead: '我们已收到您的付款截图，审核后会与您联系。', finalStep: '最后一步', uploadHeading: '上传付款截图', uploadLead: '请上传清晰的 PromptPay 转账截图或照片，以便我们审核您的预订申请。', paymentPhoto: '付款截图', uploading: '正在上传...', submitPhoto: '提交付款截图', uploadFailed: '无法提交您的付款截图，请重试。', missingBooking: '缺少您的预订编号。请返回别墅页面并重新提交申请。', returnToVilla: '返回别墅页面'
 		}
 	}
 };
 
 /** @param {string} locale */
-export const getCopy = (locale) => locale === 'th' ? copy.th : locale === 'zh-CN' ? copy['zh-CN'] : copy.en;
+export const getCopy = (locale) => locale === 'zh-CN' ? copy['zh-CN'] : copy.en;

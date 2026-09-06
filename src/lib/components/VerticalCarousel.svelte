@@ -60,7 +60,9 @@
 						fetchpriority={item.stackOffset === 0 ? 'high' : 'auto'}
 					/>
 				{:else}
-					<div class="brand-mark">{item.name.slice(0, 1)}</div>
+					<div class="brand-mark" role="img" aria-label={item.coverAlt ?? item.name}>
+						<span>{item.coverAlt ?? item.name.slice(0, 1)}</span>
+					</div>
 				{/if}
 				<div class="choice-body">
 					<p class="choice-badge">{item.badge ?? item.region ?? ''}</p>
@@ -140,6 +142,14 @@
 		font-weight: 700;
 		font-family: Georgia, serif;
 		background: linear-gradient(145deg, #eff6fb 0%, #d7e7f3 100%);
+	}
+
+	.brand-mark span {
+		font-family: var(--bs-body-font-family);
+		font-size: 1rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
 	}
 
 	.choice-body {

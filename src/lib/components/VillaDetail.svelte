@@ -1,36 +1,26 @@
 <script>
 	import { resolve } from '$app/paths';
-	import PlatformButton from '$lib/components/PlatformButton.svelte';
+	import BookingPanel from '$lib/components/BookingPanel.svelte';
+	import VillaComments from '$lib/components/VillaComments.svelte';
 	import { getCatalog } from '$lib/data/catalog.js';
 	import { getCopy, language } from '$lib/i18n.js';
 
 	let { villa: sourceVilla } = $props();
 	let c = $derived(getCopy($language).villaDetail);
 	let villa = $derived(getCatalog($language).villas.find((item) => item.id === sourceVilla.id) ?? sourceVilla);
+	let visiblePhotoCount = $state(8);
+	let visibleGallery = $derived(villa.gallery.slice(0, visiblePhotoCount));
 
-	let bookingPlatforms = $derived.by(() =>
-		getCatalog($language).platforms.map((platform) => {
-			const platformLinks =
-				platform.id === 'trip'
-					? platform.links
-					: platform.links.filter((link, index) => (('villaId' in link ? link.villaId : null) ?? (index === 0 ? 'villa-a' : 'villa-b')) === villa.id);
+	/** @param {Event} event */
+	const loadMorePhotosOnScroll = (event) => {
+		const gallery = /** @type {HTMLElement} */ (event.currentTarget);
+		const isNearEnd = gallery.scrollLeft + gallery.clientWidth >= gallery.scrollWidth - 320;
 
-			return {
-				id: platform.id,
-				name: platform.name,
-				badge: platform.id === 'trip' ? c.sharedListing : platform.region,
-				kicker: platform.id === 'trip' ? c.bothVillas : villa.name,
-				thumbnail: platform.thumbnail,
-				logo: platform.logo,
-				logoAlt: platform.logoAlt,
-				summary:
-					platform.id === 'trip'
-						? c.sharedSummary
-						: c.directListing.replace('{platform}', platform.name).replace('{villa}', villa.name),
-				links: platformLinks
-			};
-		}).filter((platform) => platform.links.length > 0)
-	);
+		if (isNearEnd && visiblePhotoCount < villa.gallery.length) {
+			visiblePhotoCount = Math.min(visiblePhotoCount + 8, villa.gallery.length);
+		}
+	};
+
 </script>
 
 <svelte:head>
@@ -43,7 +33,7 @@
 		name: villa.name,
 		description: villa.description,
 		url: `https://www.downtownoasis.net${villa.href}`,
-		image: villa.cover,
+		...(villa.cover ? { image: villa.cover } : {}),
 		address: {
 			'@type': 'PostalAddress',
 			addressLocality: 'Pattaya',
@@ -71,16 +61,22 @@
 	</nav>
 
 	<header class="villa-hero mb-4">
-		<img
-			src={villa.cover}
-			alt={`${villa.name} ${c.poolAlt}`}
-			width={villa.width}
-			height={villa.height}
-			class="img-fluid rounded-4 shadow-sm"
-			loading="eager"
-			decoding="async"
-			fetchpriority="high"
-		/>
+		{#if villa.cover}
+			<img
+				src={villa.cover}
+				alt={`${villa.name} ${c.poolAlt}`}
+				width={villa.width}
+				height={villa.height}
+				class="img-fluid rounded-4 shadow-sm"
+				loading="eager"
+				decoding="async"
+				fetchpriority="high"
+			/>
+		{:else}
+			<div class="villa-placeholder rounded-4" role="img" aria-label={villa.coverAlt ?? villa.name}>
+				{villa.coverAlt ?? villa.name}
+			</div>
+		{/if}
 	</header>
 
 	<div class="row g-4">
@@ -97,7 +93,9 @@
 				</ul>
 			</section>
 
-			<a class="btn btn-dark mt-4" href="#booking-section">{c.ready}</a>
+			{#if !villa.underConstruction}
+				<a class="btn btn-dark mt-4" href="#booking-section">{c.ready}</a>
+		{/if}
 		</section>
 
 		<aside class="col-12 col-lg-4" aria-labelledby="quick-info-heading">
@@ -135,55 +133,22 @@
 		</aside>
 	</div>
 
-	<section aria-labelledby="booking-heading" class="mt-5" id="booking-section">
-		<div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-3">
-			<div>
-				<h2 id="booking-heading" class="h3 mb-1">{c.choosePlatform}</h2>
-				<p class="text-secondary mb-0">{c.platformLead}</p>
-			</div>
-		</div>
+	{#if !villa.underConstruction}
+		<section class="mt-5" id="booking-section"><BookingPanel {villa} /></section>
+	{/if}
 
-		<div class="row g-3" aria-label={`${c.bookingAria} ${villa.name}`}>
-			{#each bookingPlatforms as platform}
-				<section class="col-12 col-lg-4" aria-labelledby={`${villa.id}-${platform.name}`}>
-					<article class="booking-option card border-0 shadow-sm h-100" data-platform={platform.id}>
-						<div class="card-body d-flex flex-column">
-							<div class="platform-thumb-wrap mb-3">
-								<img
-									src={platform.thumbnail ?? platform.logo}
-									alt={platform.logoAlt ?? platform.name}
-									class="platform-thumb"
-									width="56"
-									height="56"
-									loading="lazy"
-									decoding="async"
-								/>
-							</div>
-							<div class="d-flex flex-wrap justify-content-between align-items-start gap-2 mb-3">
-								<div>
-									<p class="platform-kicker">{platform.kicker}</p>
-									<h3 id={`${villa.id}-${platform.name}`} class="h4 mb-0">{platform.name}</h3>
-								</div>
-								<span class="platform-badge">{platform.badge}</span>
-							</div>
-							<p class="text-secondary small mb-3">{platform.summary}</p>
-							<div class="platform-links mt-auto d-flex flex-wrap gap-2">
-								{#each platform.links as link}
-									<PlatformButton label={link.label} href={link.href} variant={link.variant} />
-								{/each}
-							</div>
-						</div>
-					</article>
-				</section>
-			{/each}
-		</div>
-	</section>
-
+	{#if villa.gallery.length}
 	<section aria-labelledby="gallery-title" class="mt-5">
-		<h2 id="gallery-title" class="h3 mb-3">{c.gallery}</h2>
-		<div class="row g-3">
-			{#each villa.gallery as image}
-				<figure class="col-6 col-md-4 mb-0">
+		<div class="d-flex justify-content-between align-items-end gap-3 mb-3">
+			<h2 id="gallery-title" class="h3 mb-0">{c.gallery}</h2>
+			<p class="small text-secondary mb-0">{visibleGallery.length} / {villa.gallery.length}</p>
+		</div>
+		<div
+			class="gallery-scroll"
+			onscroll={loadMorePhotosOnScroll}
+		>
+			{#each visibleGallery as image}
+				<figure class="gallery-item mb-0">
 					<img
 						src={image.src}
 						class="img-fluid rounded-4 shadow-sm gallery-image"
@@ -196,7 +161,12 @@
 				</figure>
 			{/each}
 		</div>
+		<p class="small text-secondary mt-2 mb-0">{c.scrollMore}</p>
 	</section>
+	{/if}
+	{#if !villa.underConstruction}
+		<VillaComments villaId={villa.id} />
+	{/if}
 </article>
 
 <style>
@@ -212,71 +182,35 @@
 		object-fit: cover;
 	}
 
-	.booking-option {
-		border-radius: 1rem;
-		overflow: hidden;
-		background: linear-gradient(145deg, #ffffff 0%, #f8fbff 100%);
-		min-height: 100%;
+	.gallery-scroll {
+		display: flex;
+		gap: 1rem;
+		overflow-x: auto;
+		padding: 0.25rem 0.15rem 1rem;
+		scroll-snap-type: x proximity;
+		overscroll-behavior-inline: contain;
+		scrollbar-width: thin;
 	}
 
-	.booking-option[data-platform='trip'] {
-		background: linear-gradient(145deg, #eefaf3 0%, #ffffff 100%);
-		border: 1px solid rgb(28 126 87 / 22%);
-	}
-
-	.booking-option[data-platform='airbnb'] {
-		border: 1px solid rgb(220 53 69 / 16%);
-	}
-
-	.booking-option[data-platform='booking'] {
-		border: 1px solid rgb(13 110 253 / 16%);
-	}
-
-	.platform-kicker {
-		margin: 0 0 0.25rem;
-		font-size: 0.76rem;
-		font-weight: 700;
-		letter-spacing: 0.08em;
-		text-transform: uppercase;
-		color: #617785;
-	}
-
-	.platform-badge {
-		display: inline-flex;
-		align-items: center;
-		padding: 0.3rem 0.65rem;
-		border-radius: 999px;
-		background: #eef3f6;
-		color: #47606f;
-		font-size: 0.78rem;
-		font-weight: 700;
-	}
-
-	.booking-option[data-platform='trip'] .platform-badge {
-		background: rgb(28 126 87 / 12%);
-		color: #176344;
+	.gallery-item {
+		flex: 0 0 min(78vw, 25rem);
+		scroll-snap-align: start;
 	}
 
 	:global(#booking-section) {
 		scroll-margin-top: 1.5rem;
 	}
 
-	.platform-links :global(.btn) {
-		margin-right: 0;
-		margin-bottom: 0;
-	}
-
-	.platform-thumb-wrap {
-		display: flex;
-		align-items: center;
-	}
-
-	.platform-thumb {
-		object-fit: contain;
-		padding: 0.2rem;
-		border-radius: 0.85rem;
-		box-shadow: 0 0.55rem 1rem rgb(18 37 48 / 16%);
-		background: #fff;
+	.villa-placeholder {
+		display: grid;
+		place-items: center;
+		width: 100%;
+		min-height: 24rem;
+		background: linear-gradient(145deg, #eff6fb 0%, #d7e7f3 100%);
+		color: #526b79;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
 	}
 
 	.quick-info-card {
