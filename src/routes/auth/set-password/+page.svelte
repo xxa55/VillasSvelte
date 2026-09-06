@@ -8,12 +8,9 @@
 	let message = $state('');
 	let saving = $state(false);
 
-	$effect(() => {
-		if (auth.ready && !auth.user) location.replace('/login');
-	});
-
 	async function setPassword() {
 		message = '';
+		if (!auth.user) { message = 'Open this page from the password-reset email, then try again.'; return; }
 		if (password.length < 8) { message = 'Use a password with at least 8 characters.'; return; }
 		if (password !== confirmation) { message = 'The passwords do not match.'; return; }
 		saving = true;
