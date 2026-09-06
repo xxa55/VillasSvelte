@@ -43,11 +43,34 @@ create table if not exists public.comments (
   created_at timestamptz not null default now()
 );
 
+create table if not exists public.availability_blocks (
+  id uuid primary key default gen_random_uuid(),
+  villa_id text not null check (villa_id in ('villa-a', 'villa-b')),
+  check_in date not null,
+  check_out date not null,
+  note text check (char_length(note) <= 200),
+  created_by uuid not null references auth.users(id) on delete restrict,
+  created_at timestamptz not null default now(),
+  check (check_out > check_in)
+);
+
+do $$
+begin
+  if not exists (select 1 from pg_constraint where conname = 'availability_blocks_no_overlap') then
+    alter table public.availability_blocks add constraint availability_blocks_no_overlap
+    exclude using gist (
+      villa_id with =,
+      daterange(check_in, check_out, '[)') with &&
+    );
+  end if;
+end $$;
+
 alter table public.comments
 add column if not exists rating smallint not null default 5 check (rating between 1 and 5);
 
 alter table public.bookings enable row level security;
 alter table public.comments enable row level security;
+alter table public.availability_blocks enable row level security;
 
 drop policy if exists "comments are public" on public.comments;
 drop policy if exists "users create comments" on public.comments;
@@ -68,10 +91,12 @@ grant insert, delete on table public.comments to authenticated;
 grant usage, select on sequence public.comments_id_seq to authenticated;
 grant select on table public.bookings to authenticated;
 grant select, insert, update on table public.bookings to service_role;
+grant select, insert, update, delete on table public.availability_blocks to service_role;
 
 insert into storage.buckets (id, name, public)
 values ('payment-proofs', 'payment-proofs', false)
 on conflict (id) do update set public = false;
 
 create index if not exists bookings_villa_dates_idx on public.bookings(villa_id, check_in, check_out);
+create index if not exists availability_blocks_villa_dates_idx on public.availability_blocks(villa_id, check_in, check_out);
 create index if not exists comments_villa_created_idx on public.comments(villa_id, created_at desc);

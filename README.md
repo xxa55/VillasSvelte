@@ -22,6 +22,10 @@ Run `supabase/schema.sql` in the Supabase SQL editor before deployment to create
 
 `SENDGRID_FROM_EMAIL` must be a verified SendGrid sender so payment-proof notifications can be delivered.
 
+## Availability management
+
+`oasis55168@gmail.com` is the administrator account. After signing in, it can open `/admin/availability` to mark a Villa A or Villa B date range unavailable after checking Hotext. These manual blocks, along with confirmed bookings, appear as unavailable dates to guests. The administrator can remove a block when the dates are available again.
+
 ## Google sign-in
 
 The sign-in page supports Google OAuth through Supabase. In Supabase, open **Authentication > Providers > Google**, enable Google, and add the Google OAuth client ID and client secret. In Google Cloud, add this Supabase callback URL to the OAuth client's authorized redirect URIs:
