@@ -1,4 +1,5 @@
 <script>
+	import { onMount } from 'svelte';
 	import { getAuthContext } from '$lib/auth/context.js';
 	import { supabase } from '$lib/supabaseClient.js';
 
@@ -7,6 +8,19 @@
 	let confirmation = $state('');
 	let message = $state('');
 	let saving = $state(false);
+
+	onMount(async () => {
+		const hash = new URLSearchParams(location.hash.slice(1));
+		const accessToken = hash.get('access_token');
+		const refreshToken = hash.get('refresh_token');
+		if (!accessToken || !refreshToken) return;
+		const { data, error } = await supabase.auth.setSession({ access_token: accessToken, refresh_token: refreshToken });
+		if (error) { message = 'Your password-reset link is invalid or has expired. Request a new one.'; return; }
+		auth.session = data.session;
+		auth.user = data.user;
+		auth.ready = true;
+		history.replaceState({}, '', location.pathname);
+	});
 
 	async function setPassword() {
 		message = '';
