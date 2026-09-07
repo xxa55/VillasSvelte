@@ -2,7 +2,7 @@ import { writable } from 'svelte/store';
 
 export const supportedLanguages = [
 	{ code: 'en', label: 'English' },
-	{ code: 'zh-CN', label: '简体中文' }
+	{ code: 'zh-TW', label: '繁體中文' }
 ];
 
 export const language = writable('en');
@@ -12,7 +12,7 @@ export const copy = {
 		language: { label: 'Language' },
 		account: { signIn: 'Sign in', signOut: 'Sign out' },
 		auth: { title: 'Sign in | Downtown Oasis', eyebrow: 'Guest account', heading: 'Sign in to book.', lead: 'Use one account for booking requests, booking history, and villa comments.', email: 'Email', password: 'Password', signIn: 'Sign in', createAccount: 'Create account', continueGoogle: 'Continue with Google' },
-		comments: { eyebrow: 'Guest reviews', heading: 'Notes from our guests.', rating: 'Your rating', star: 'star', stars: 'stars', placeholder: 'Share a helpful comment about your stay', post: 'Post review', checkingAuth: 'Checking your sign-in status. Please try again.', guest: 'Guest', thanks: 'Thank you for sharing your experience.', outOfFive: 'out of 5 stars', empty: 'No reviews yet. Be the first to share your stay.' },
+		comments: { eyebrow: 'Guest reviews', heading: 'Notes from our guests.', rating: 'Your rating', star: 'star', stars: 'stars', placeholder: 'Share a helpful comment about your stay', post: 'Post review', checkingAuth: 'Checking your sign-in status. Please try again.', guest: 'Guest', thanks: 'Thank you for sharing your experience.', outOfFive: 'out of 5 stars', empty: 'No reviews yet. Be the first to share your stay.', delete: 'Delete comment', deleting: 'Deleting...', deleteFailed: 'The comment could not be deleted.' },
 		home: {
 			title: 'Pattaya Villas | Private Villas for Rent',
 			description: 'Private villas in Pattaya with pools, BBQ areas, a central location, and secure direct booking.',
@@ -60,65 +60,73 @@ export const copy = {
 			title: 'Payment | Downtown Oasis', description: 'PromptPay instructions for your Downtown Oasis booking request.', requestReceived: 'Booking request received', heading: 'Complete your deposit', lead: 'Transfer the non-refundable $100 USD deposit, approximately ฿3,300, using PromptPay. We will let you know whether your booking is successful.',
 			staySummary: '{villa}: {checkIn} to {checkOut}', promptPay: 'PromptPay', scanHeading: 'Scan to transfer', scanLead: 'Use your banking app to scan the QR code. Keep your transfer confirmation until we confirm your booking.', qrAlt: 'PromptPay QR code for the booking deposit',
 			accountVerification: 'Account verification', accountHeading: 'Company account', accountLead: 'Confirm the recipient details in your banking app before transferring.', accountAlt: 'Downtown Oasis company account document',
+			accountBank: 'Bank', accountBranch: 'Branch', accountNumber: 'Account number', accountName: 'Account name', accountType: 'Account type', accountTypeValue: 'Savings account', accountBankValue: 'Kasikornbank', accountBranchValue: 'Central Pattaya Branch', accountNumberValue: '218-2-06057-9', accountNameValue: 'DOWNTOWN OASIS CO., LTD.',
 			receiptReceived: 'Receipt received', reviewHeading: 'We are reviewing your booking request.', reviewLead: 'We received your payment photo and will contact you after review.', finalStep: 'Final step', uploadHeading: 'Upload your payment photo', uploadLead: 'Upload a clear screenshot or photo of your PromptPay transfer so we can review your booking request.', paymentPhoto: 'Payment photo', uploading: 'Uploading...', submitPhoto: 'Submit payment photo', uploadFailed: 'Your payment photo could not be submitted. Please try again.', missingBooking: 'Your booking reference is missing. Return to the villa page and submit your request again.', returnToVilla: 'Return to villa'
+		},
+		hostexBooking: {
+			eyebrow: 'Direct booking', heading: 'Check availability and prices', lead: 'Choose your dates and guest count first. After you see the live Hostex price, upload your paid receipt before submitting the booking request.', checkingAuth: 'Checking your sign-in status...', signInRequired: 'Sign-in is required to book.', signInLead: 'Please sign in before viewing availability, uploading payment, or requesting this villa.', signIn: 'Sign in to book', unavailable: 'This villa is not available for direct booking yet.', chooseDates: 'Choose your dates first', chooseDatesLead: 'After you click Check prices, the payment instructions and receipt upload will appear before the final Hostex booking step.', uploadToContinue: 'Upload receipt to continue', manualPayment: 'Manual payment required', manualPaymentLead: 'After selecting your dates and reviewing the Hostex price above, transfer the required deposit using the account below. Upload a clear paid receipt before submitting the Hostex booking request. Your booking is not confirmed until the payment is reviewed.', bank: 'Bank', branch: 'Branch', accountNumber: 'Account number', accountName: 'Account name', accountType: 'Account type', accountTypeValue: 'Savings account', payPromptPay: 'Pay with PromptPay', promptPayLead: 'Scan this QR code with your banking app, then upload the paid receipt below.', qrAlt: 'PromptPay payment QR code', email: 'Your email', receiptPhoto: 'Paid receipt photo', sending: 'Sending receipt...', sendReceipt: 'Send receipt and continue', receiptReceived: 'Receipt received.', receiptContinue: 'You can now submit the Hostex booking request above.', receiptRequired: 'Please upload your paid receipt before continuing to the Hostex booking page.', bankValue: 'Kasikornbank', branchValue: 'Central Pattaya Branch', accountNumberValue: '218-2-06057-9', accountNameValue: 'DOWNTOWN OASIS CO., LTD.'
 		}
 	},
-	'zh-CN': {
+	'zh-TW': {
 		language: { label: '语言' },
-		account: { signIn: '登录', signOut: '退出登录' },
-		auth: { title: '登录 | 芭提雅城市绿洲', eyebrow: '住客账户', heading: '登录后即可预订', lead: '使用同一账户提交预订申请、查看预订记录和发布别墅评价。', email: '邮箱', password: '密码', signIn: '登录', createAccount: '创建账户', continueGoogle: '使用 Google 继续' },
-		comments: { eyebrow: '住客评价', heading: '住客留言', rating: '您的评分', star: '星', stars: '星', placeholder: '分享您入住期间的体验', post: '发布评价', checkingAuth: '正在检查登录状态，请稍后重试。', guest: '住客', thanks: '感谢您分享入住体验。', outOfFive: '满分 5 星', empty: '暂无评价，欢迎成为第一位分享入住体验的住客。' },
+		account: { signIn: '登入', signOut: '登出' },
+		auth: { title: '登入 | 芭提雅城市綠洲', eyebrow: '住客帳戶', heading: '登入後即可預訂', lead: '使用同一帳戶提交預訂申請、查看預訂記錄和發佈別墅評價。', email: '電郵', password: '密碼', signIn: '登入', createAccount: '建立帳戶', continueGoogle: '使用 Google 繼續' },
+		comments: { eyebrow: '住客評價', heading: '住客留言', rating: '您的評分', star: '星', stars: '星', placeholder: '分享您入住期間的體驗', post: '發佈評價', checkingAuth: '正在檢查登入狀態，請稍後重試。', guest: '住客', thanks: '感謝您分享入住體驗。', outOfFive: '滿分 5 星', empty: '暫無評價，歡迎成為第一位分享入住體驗的住客。', delete: '刪除留言', deleting: '正在刪除...', deleteFailed: '無法刪除留言。' },
 		home: {
-			title: '芭提雅城市绿洲泳池别墅 | 私人泳池度假住宿',
-			description: '位于芭提雅市中心的私人泳池别墅，配有烧烤区和厨房，可通过多种预订平台灵活预订。',
-			brand: '芭提雅城市绿洲', about: '别墅介绍', location: '位置', book: '预订',
-			heroTitle: '海滩附近的私享泳池别墅',
-			heroLead: '私人泳池、烧烤区和适合多人入住的宽敞空间，为您提供灵活便捷的预订方式。',
-			bookStay: '预订住宿', seeVillas: '查看别墅', videoFallback: '您的浏览器不支持播放此视频。',
-			welcome: '欢迎入住城市绿洲泳池别墅', welcomeLead: '选择心仪别墅，按您喜欢的方式预订。',
+			title: '芭提雅城市綠洲泳池別墅 | 私人泳池度假住宿',
+			description: '位於芭提雅市中心的私人泳池別墅，配有燒烤區和廚房，可透過多種預訂平台靈活預訂。',
+			brand: '芭提雅城市綠洲', about: '別墅介紹', location: '位置', book: '預訂',
+			heroTitle: '海灘附近的私享泳池別墅',
+			heroLead: '私人泳池、燒烤區和適合多人入住的寬敞空間，為您提供靈活便捷的預訂方式。',
+			bookStay: '預訂住宿', seeVillas: '查看別墅', videoFallback: '您的瀏覽器不支援播放此影片。',
+			welcome: '歡迎入住城市綠洲泳池別墅', welcomeLead: '選擇心儀別墅，按您喜歡的方式預訂。',
 			amenities: [
-				{ title: '私人泳池', description: '在专属私人泳池和日光休闲区尽情放松。' },
-				{ title: '烧烤区与厨房', description: '配有户外烧烤区和设备齐全的厨房。' },
-				{ title: '舒适客房', description: '多间舒适客房，为家人和朋友提供充足的私密空间。' }
+				{ title: '私人泳池', description: '在專屬私人泳池和日光休閒區盡情放鬆。' },
+				{ title: '燒烤區與廚房', description: '配有戶外燒烤區和設備齊全的廚房。' },
+				{ title: '舒適客房', description: '多間舒適客房，為家人和朋友提供充足的私密空間。' }
 			],
-			where: '别墅位置', whereLead: '靠近海滩、芭提雅步行街、餐厅和购物中心。',
-			addressLabel: '地址', address: '泰国春武里府邦拉蒙县芭提雅市 297/3，邮编 20150',
-			locationPoints: ['位于芭提雅市中心及海滩路附近', '邻近夜生活区、餐厅和热门景点', '方便客人上下车及接送'],
-			openMaps: '在 Google 地图中查看 ↗', propertyAddress: '别墅地址', mapAlt: '芭提雅市中心位置地图',
-			mapZoom: '双击放大芭提雅位置地图', mapCaption: '位置地图预览。双击可放大，或在 Google 地图中查看。',
-			bookHeading: '预订住宿', bookLead: '选择别墅和日期，然后直接预订。', villas: '别墅', platforms: '预订平台', choose: '查看并选择',
-			contact: '联系我们', connect: '社交平台', place: '泰国芭提雅', closePreview: '关闭图片预览', zoomQr: '双击放大二维码',
-			previous: '上一个', next: '下一个'
+			where: '別墅位置', whereLead: '靠近海灘、芭提雅步行街、餐廳和購物中心。',
+			addressLabel: '地址', address: '泰國春武里府邦拉蒙縣芭提雅市 297/3，郵編 20150',
+			locationPoints: ['位於芭提雅市中心及海灘路附近', '鄰近夜生活區、餐廳和熱門景點', '方便客人上下車及接送'],
+			openMaps: '在 Google 地圖中查看 ↗', propertyAddress: '別墅地址', mapAlt: '芭提雅市中心位置地圖',
+			mapZoom: '雙擊放大芭提雅位置地圖', mapCaption: '位置地圖預覽。雙擊可放大，或在 Google 地圖中查看。',
+			bookHeading: '預訂住宿', bookLead: '選擇別墅和日期，然後直接預訂。', villas: '別墅', platforms: '預訂平台', choose: '查看並選擇',
+			contact: '聯絡我們', connect: '社交平台', place: '泰國芭提雅', closePreview: '關閉圖片預覽', zoomQr: '雙擊放大二維碼',
+			previous: '上一個', next: '下一個'
 		},
 		villasPage: {
-			title: '别墅 | 芭提雅城市绿洲', description: '查看位于芭提雅市中心的A栋和B栋私人泳池别墅，配有烧烤区、KTV，并支持直接或通过平台预订。',
-			label: '泳池别墅', heading: '选择心仪别墅', seePlatforms: '查看预订平台', explore: '查看'
+			title: '別墅 | 芭提雅城市綠洲', description: '查看位於芭提雅市中心的 A 棟和 B 棟私人泳池別墅，配有燒烤區、KTV，並支援直接或透過平台預訂。',
+			label: '泳池別墅', heading: '選擇心儀別墅', seePlatforms: '查看預訂平台', explore: '查看'
 		},
 		platformsPage: {
-			title: '预订平台 | 芭提雅城市绿洲', description: '可通过 Airbnb 和 Booking.com 分别预订城市绿洲泳池别墅，也可在 Trip.com 查看共享房源。',
-			label: '预订平台', heading: '选择预订平台', lead: 'Trip.com 使用共享房源页面，Airbnb 按别墅分别展示。', seeVillas: '查看别墅',
-			relationship: '平台与别墅对应关系', relationshipLead: 'Trip.com 的一个共享房源页面包含两栋别墅；Airbnb 则为每栋别墅提供独立房源页面。'
+			title: '預訂平台 | 芭提雅城市綠洲', description: '可透過 Airbnb 和 Booking.com 分別預訂城市綠洲泳池別墅，也可在 Trip.com 查看共享房源。',
+			label: '預訂平台', heading: '選擇預訂平台', lead: 'Trip.com 使用共享房源頁面，Airbnb 按別墅分別展示。', seeVillas: '查看別墅',
+			relationship: '平台與別墅對應關係', relationshipLead: 'Trip.com 的一個共享房源頁面包含兩棟別墅；Airbnb 則為每棟別墅提供獨立房源頁面。'
 		},
 		villaDetail: {
-			siteName: '芭提雅城市绿洲', home: '首页', villas: '别墅', poolAlt: '私人泳池', amenities: '设施与服务', ready: '开始预订',
-			quickInfo: '基本信息', guests: '可住人数', bedrooms: '卧室', bathrooms: '浴室', location: '位置', booking: '预订方式', highlights: '特色设施',
-			choosePlatform: '选择预订平台', platformLead: 'Trip.com 为两栋别墅的共享页面；Airbnb 和 Booking.com 提供各栋别墅的独立房源页面。', bookingAria: '预订平台：', gallery: '图片展示',
-			sharedListing: '共享房源', separateListings: '独立房源', bothVillas: '两栋别墅', sharedSummary: '此房源页面同时展示A栋和B栋别墅。', directListing: '在 {platform} 查看并预订{villa}。', breadcrumb: '页面路径', scrollMore: '横向滑动查看更多照片'
+			siteName: '芭提雅城市綠洲', home: '首頁', villas: '別墅', poolAlt: '私人泳池', amenities: '設施與服務', ready: '開始預訂',
+			quickInfo: '基本資訊', guests: '可住人數', bedrooms: '臥室', bathrooms: '浴室', location: '位置', booking: '預訂方式', highlights: '特色設施',
+			choosePlatform: '選擇預訂平台', platformLead: 'Trip.com 為兩棟別墅的共享頁面；Airbnb 和 Booking.com 提供各棟別墅的獨立房源頁面。', bookingAria: '預訂平台：', gallery: '圖片展示',
+			sharedListing: '共享房源', separateListings: '獨立房源', bothVillas: '兩棟別墅', sharedSummary: '此房源頁面同時展示 A 棟和 B 棟別墅。', directListing: '在 {platform} 查看並預訂{villa}。', breadcrumb: '頁面路徑', scrollMore: '橫向滑動查看更多照片'
 		},
 		bookingPanel: {
-			eyebrow: '直接预订', heading: '提交入住申请', lead: '直接预订，每天可节省 ฿1,000。确认预订需支付不可退款的 100 美元定金（约 ฿3,300）。我们将通知您预订是否成功；如无法确认预订，我们会联系您退还定金。',
-			checkIn: '入住日期', checkOut: '退房日期', selectDate: '请在下方选择日期', selectLaterDate: '请选择之后的日期', selectCheckInFirst: '请先选择入住日期', request: '提交预订申请', sending: '正在提交申请...',
-			calendarFor: '选择 {villa} 的日期', calendarHeading: '请在日历上选择入住日期', stepOne: '选择入住日期', stepTwo: '选择退房日期', previousMonth: '上个月', nextMonth: '下个月', booked: '已预订', unavailable: '不可用', available: '可预订',
-			checkingAuth: '正在检查登录状态，请稍后重试。', chooseDates: '请选择可用的入住和退房日期。', chooseCheckOut: '现在请选择退房日期。', bookedDates: '所选日期包含已预订日期，请选择其他日期。'
+			eyebrow: '直接預訂', heading: '提交入住申請', lead: '直接預訂，每天可節省 ฿1,000。確認預訂需支付不可退款的 100 美元訂金（約 ฿3,300）。我們將通知您預訂是否成功；如無法確認預訂，我們會聯絡您退還訂金。',
+			checkIn: '入住日期', checkOut: '退房日期', selectDate: '請在下方選擇日期', selectLaterDate: '請選擇之後的日期', selectCheckInFirst: '請先選擇入住日期', request: '提交預訂申請', sending: '正在提交申請...',
+			calendarFor: '選擇 {villa} 的日期', calendarHeading: '請在日曆上選擇入住日期', stepOne: '選擇入住日期', stepTwo: '選擇退房日期', previousMonth: '上個月', nextMonth: '下個月', booked: '已預訂', unavailable: '不可用', available: '可預訂',
+			checkingAuth: '正在檢查登入狀態，請稍後重試。', chooseDates: '請選擇可用的入住和退房日期。', chooseCheckOut: '現在請選擇退房日期。', bookedDates: '所選日期包含已預訂日期，請選擇其他日期。'
 		},
 		payment: {
-			title: '付款 | 芭提雅城市绿洲', description: '芭提雅城市绿洲预订申请的 PromptPay 付款说明。', requestReceived: '已收到预订申请', heading: '完成定金支付', lead: '请通过 PromptPay 支付不可退款的 100 美元定金，约合 ฿3,300。我们将通知您预订是否成功。',
-			staySummary: '{villa}：{checkIn} 至 {checkOut}', promptPay: 'PromptPay', scanHeading: '扫码转账', scanLead: '请使用您的银行应用扫描二维码。请保留转账凭证，直至我们确认您的预订。', qrAlt: '预订定金 PromptPay 二维码',
-			accountVerification: '账户核验', accountHeading: '公司账户', accountLead: '转账前，请在您的银行应用中确认收款人信息。', accountAlt: '芭提雅城市绿洲公司账户文件',
-			receiptReceived: '已收到付款凭证', reviewHeading: '我们正在审核您的预订申请。', reviewLead: '我们已收到您的付款截图，审核后会与您联系。', finalStep: '最后一步', uploadHeading: '上传付款截图', uploadLead: '请上传清晰的 PromptPay 转账截图或照片，以便我们审核您的预订申请。', paymentPhoto: '付款截图', uploading: '正在上传...', submitPhoto: '提交付款截图', uploadFailed: '无法提交您的付款截图，请重试。', missingBooking: '缺少您的预订编号。请返回别墅页面并重新提交申请。', returnToVilla: '返回别墅页面'
+			title: '付款 | 芭提雅城市綠洲', description: '芭提雅城市綠洲預訂申請的 PromptPay 付款說明。', requestReceived: '已收到預訂申請', heading: '完成訂金支付', lead: '請透過 PromptPay 支付不可退款的 100 美元訂金，約合 ฿3,300。我們將通知您預訂是否成功。',
+			staySummary: '{villa}：{checkIn} 至 {checkOut}', promptPay: 'PromptPay', scanHeading: '掃碼轉帳', scanLead: '請使用您的銀行應用程式掃描二維碼。請保留轉帳憑證，直至我們確認您的預訂。', qrAlt: '預訂訂金 PromptPay 二維碼',
+			accountVerification: '帳戶核驗', accountHeading: '公司帳戶', accountLead: '轉帳前，請在您的銀行應用程式中確認收款人資訊。', accountAlt: '芭提雅城市綠洲公司帳戶資料',
+			accountBank: '銀行', accountBranch: '分行', accountNumber: '帳戶號碼', accountName: '帳戶名稱', accountType: '帳戶類型', accountTypeValue: '儲蓄帳戶', accountBankValue: 'Kasikornbank', accountBranchValue: 'Central Pattaya Branch', accountNumberValue: '218-2-06057-9', accountNameValue: 'DOWNTOWN OASIS CO., LTD.',
+			receiptReceived: '已收到付款憑證', reviewHeading: '我們正在審核您的預訂申請。', reviewLead: '我們已收到您的付款截圖，審核後會與您聯絡。', finalStep: '最後一步', uploadHeading: '上傳付款截圖', uploadLead: '請上傳清晰的 PromptPay 轉帳截圖或照片，以便我們審核您的預訂申請。', paymentPhoto: '付款截圖', uploading: '正在上傳...', submitPhoto: '提交付款截圖', uploadFailed: '無法提交您的付款截圖，請重試。', missingBooking: '缺少您的預訂編號。請返回別墅頁面並重新提交申請。', returnToVilla: '返回別墅頁面'
+		},
+		hostexBooking: {
+			eyebrow: '直接預訂', heading: '查看房態與價格', lead: '請先選擇入住日期和人數。查看 Hostex 即時價格後，請上傳已付款的收據，再提交預訂申請。', checkingAuth: '正在檢查登入狀態...', signInRequired: '預訂前必須登入。', signInLead: '請先登入，才能查看房態、上傳付款收據或申請入住。', signIn: '登入後預訂', unavailable: '此別墅目前尚未開放直接預訂。', chooseDates: '請先選擇日期', chooseDatesLead: '按下「查看價格」後，付款說明和收據上傳欄位會在 Hostex 最後預訂步驟前顯示。', uploadToContinue: '上傳收據以繼續', manualPayment: '需要手動付款', manualPaymentLead: '選擇日期並查看 Hostex 價格後，請使用以下帳戶支付訂金。提交 Hostex 預訂申請前，請上傳清晰的付款收據。付款核實前，預訂尚未確認。', bank: '銀行', branch: '分行', accountNumber: '帳戶號碼', accountName: '帳戶名稱', accountType: '帳戶類型', accountTypeValue: '儲蓄帳戶', payPromptPay: '使用 PromptPay 付款', promptPayLead: '請使用銀行應用程式掃描此二維碼，然後在下方上傳付款收據。', qrAlt: 'PromptPay 付款二維碼', email: '您的電郵', receiptPhoto: '已付款收據照片', sending: '正在傳送收據...', sendReceipt: '傳送收據並繼續', receiptReceived: '已收到收據。', receiptContinue: '現在可以提交上方的 Hostex 預訂申請。', receiptRequired: '請先上傳已付款的收據，才能繼續前往 Hostex 預訂頁面。', bankValue: 'Kasikornbank', branchValue: 'Central Pattaya Branch', accountNumberValue: '218-2-06057-9', accountNameValue: 'DOWNTOWN OASIS CO., LTD.'
 		}
 	}
 };
 
 /** @param {string} locale */
-export const getCopy = (locale) => locale === 'zh-CN' ? copy['zh-CN'] : copy.en;
+export const getCopy = (locale) => locale === 'zh-TW' ? copy['zh-TW'] : copy.en;

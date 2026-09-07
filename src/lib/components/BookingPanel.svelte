@@ -15,7 +15,7 @@
 	let busy = $state(false);
 	let minDate = new Date().toISOString().slice(0, 10);
 	let calendarMonth = $state(new Date(new Date().getFullYear(), new Date().getMonth(), 1));
-	let weekDays = $derived($language === 'zh-CN' ? ['周日', '周一', '周二', '周三', '周四', '周五', '周六'] : ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']);
+	let weekDays = $derived($language === 'zh-TW' ? ['週日', '週一', '週二', '週三', '週四', '週五', '週六'] : ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']);
 
 	let calendarDays = $derived.by(() => {
 		const year = calendarMonth.getFullYear();

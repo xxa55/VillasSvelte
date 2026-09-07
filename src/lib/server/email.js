@@ -71,3 +71,27 @@ export async function sendPaymentProofEmail({ booking, receipt }) {
 	});
 	if (!response.ok) throw new Error(`SendGrid rejected the payment-proof email (${response.status}): ${await response.text()}`);
 }
+
+/** @param {{ villaId: string, guestEmail: string, receipt: { content: string, type: string, filename: string } }} payment */
+export async function sendPreBookingPaymentProofEmail({ villaId, guestEmail, receipt }) {
+	const apiKey = env.SENDGRID_API_KEY;
+	const fromEmail = env.SENDGRID_FROM_EMAIL;
+	if (!apiKey || !fromEmail) throw new Error('SendGrid server environment variables are not configured.');
+
+	const villaName = villaId === 'villa-b' ? 'Villa B' : 'Villa A';
+	const text = `A payment receipt was uploaded before a Hostex booking request. Villa: ${villaName}. Guest email: ${guestEmail}. The receipt is attached for review.`;
+	const html = `<h1>Pre-booking payment receipt uploaded</h1><p><strong>Villa:</strong> ${escapeHtml(villaName)}</p><p><strong>Guest email:</strong> ${escapeHtml(guestEmail)}</p><p>The receipt was uploaded before the guest submitted the Hostex booking request. The receipt is attached for review.</p>`;
+	const response = await fetch('https://api.sendgrid.com/v3/mail/send', {
+		method: 'POST',
+		headers: { authorization: `Bearer ${apiKey}`, 'content-type': 'application/json' },
+		body: JSON.stringify({
+			personalizations: [{ to: [{ email: 'oasis55168@gmail.com' }] }],
+			from: { email: fromEmail, name: env.SENDGRID_FROM_NAME || 'Downtown Oasis' },
+			subject: `Pre-booking payment receipt: ${villaName}`,
+			content: [{ type: 'text/plain', value: text }, { type: 'text/html', value: html }],
+			reply_to: { email: guestEmail },
+			attachments: [{ content: receipt.content, type: receipt.type, filename: receipt.filename, disposition: 'attachment' }]
+		})
+	});
+	if (!response.ok) throw new Error(`SendGrid rejected the pre-booking payment-proof email (${response.status}): ${await response.text()}`);
+}

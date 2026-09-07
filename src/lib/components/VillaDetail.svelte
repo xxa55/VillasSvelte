@@ -1,6 +1,6 @@
 <script>
 	import { resolve } from '$app/paths';
-	import BookingPanel from '$lib/components/BookingPanel.svelte';
+	import HostexBookingWidget from '$lib/components/HostexBookingWidget.svelte';
 	import VillaComments from '$lib/components/VillaComments.svelte';
 	import { getCatalog } from '$lib/data/catalog.js';
 	import { getCopy, language } from '$lib/i18n.js';
@@ -52,7 +52,7 @@
 </svelte:head>
 
 <article class="container py-4 py-lg-5">
-	<nav aria-label={c.breadcrumb ?? ($language === 'zh-CN' ? '页面路径' : 'Breadcrumb')} class="mb-4 small">
+	<nav aria-label={c.breadcrumb ?? ($language === 'zh-TW' ? '頁面路徑' : 'Breadcrumb')} class="mb-4 small">
 		<a href={resolve('/')} class="text-decoration-none">{c.home}</a>
 		<span class="mx-2 text-secondary">/</span>
 		<a href={resolve('/villas')} class="text-decoration-none">{c.villas}</a>
@@ -134,7 +134,7 @@
 	</div>
 
 	{#if !villa.underConstruction}
-		<section class="mt-5" id="booking-section"><BookingPanel {villa} /></section>
+		<section class="mt-5" id="booking-section"><HostexBookingWidget villaId={villa.id} /></section>
 	{/if}
 
 	{#if villa.gallery.length}

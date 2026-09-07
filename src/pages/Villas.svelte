@@ -12,6 +12,7 @@
 	<title>{c.title}</title>
 	<meta name="description" content={c.description} />
 	<link rel="canonical" href={`https://www.downtownoasis.net${resolve('/villas')}`} />
+	<script src="https://hostex.io/app/assets/js/hostex-widget.js?version=20260902163817" type="module"></script>
 </svelte:head>
 
 <section class="container py-5">
@@ -51,4 +52,5 @@
 	.home-tag:hover {
 		background: #f0f5f1;
 	}
+
 </style>

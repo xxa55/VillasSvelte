@@ -1,5 +1,5 @@
 import { json } from '@sveltejs/kit';
-import { sendPaymentProofEmail } from '$lib/server/email.js';
+import { sendPaymentProofEmail, sendPreBookingPaymentProofEmail } from '$lib/server/email.js';
 import { getAdminClient } from '$lib/server/supabase.js';
 
 const acceptedTypes = new Set(['image/jpeg', 'image/png', 'image/webp']);
@@ -11,9 +11,29 @@ export async function POST({ request, locals }) {
 
 	const form = await request.formData();
 	const bookingId = String(form.get('bookingId') ?? '');
+	const villaId = String(form.get('villaId') ?? '');
+	const guestEmail = String(form.get('guestEmail') ?? '').trim();
 	const receipt = form.get('receipt');
-	if (!(receipt instanceof File) || !bookingId || !acceptedTypes.has(receipt.type) || receipt.size > maximumFileSize) {
+	if (!(receipt instanceof File) || (!bookingId && !['villa-a', 'villa-b'].includes(villaId)) || (!bookingId && !/^\S+@\S+\.\S+$/.test(guestEmail)) || !acceptedTypes.has(receipt.type) || receipt.size > maximumFileSize) {
 		return json({ error: 'Upload a JPG, PNG, or WebP payment photo smaller than 10 MB.' }, { status: 400 });
+	}
+
+	if (!bookingId) {
+		try {
+			await sendPreBookingPaymentProofEmail({
+				villaId,
+				guestEmail,
+				receipt: {
+					content: Buffer.from(await receipt.arrayBuffer()).toString('base64'),
+					type: receipt.type,
+					filename: `pre-booking-payment-receipt.${receipt.type.split('/')[1]}`
+				}
+			});
+		} catch (emailError) {
+			console.error('Pre-booking payment-proof notification could not be sent', emailError);
+			return json({ error: 'We could not notify the booking team. Please try again.' }, { status: 502 });
+		}
+		return json({ ok: true, preBooking: true });
 	}
 
 	const admin = getAdminClient();

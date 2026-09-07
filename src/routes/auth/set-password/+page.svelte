@@ -34,7 +34,7 @@
 			saving = false;
 			return;
 		}
-		location.replace('/admin/availability');
+		location.replace('/villas');
 	}
 </script>
 

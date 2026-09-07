@@ -54,9 +54,6 @@
 	<div class="container d-flex justify-content-end align-items-center gap-3 py-2">
 		{#if auth.user}
 			<span class="account-email">{auth.user.email}</span>
-			{#if auth.user.email?.toLowerCase() === 'oasis55168@gmail.com'}
-				<a class="account-link" href={resolve('/admin/availability')}>Manage dates</a>
-			{/if}
 			<form method="POST" action={resolve('/logout')}>
 				<button class="account-link account-button" type="submit">{c.signOut}</button>
 			</form>

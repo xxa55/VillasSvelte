@@ -5,7 +5,7 @@
 
 	let villaId = $derived(page.url.searchParams.get('villa'));
 	let c = $derived(getCopy($language).payment);
-	let villaName = $derived($language === 'zh-CN' ? (villaId === 'villa-b' ? 'B栋别墅' : 'A栋别墅') : (villaId === 'villa-b' ? 'Villa B' : 'Villa A'));
+	let villaName = $derived($language === 'zh-TW' ? (villaId === 'villa-b' ? 'B棟別墅' : 'A棟別墅') : (villaId === 'villa-b' ? 'Villa B' : 'Villa A'));
 	let checkIn = $derived(page.url.searchParams.get('checkIn'));
 	let checkOut = $derived(page.url.searchParams.get('checkOut'));
 	let bookingId = $derived(page.url.searchParams.get('booking'));
@@ -73,15 +73,15 @@
 			<h2 id="account-heading">{c.accountHeading}</h2>
 			<p>{c.accountLead}</p>
 		</div>
-		<img
-			src={asset('/Company account.jpg')}
-			alt={c.accountAlt}
-			class="account-document"
-			width="768"
-			height="1024"
-			loading="lazy"
-			decoding="async"
-		/>
+		<table class="account-details">
+			<tbody>
+				<tr><th scope="row">{c.accountBank}</th><td>{c.accountBankValue}</td></tr>
+				<tr><th scope="row">{c.accountBranch}</th><td>{c.accountBranchValue}</td></tr>
+				<tr><th scope="row">{c.accountNumber}</th><td>{c.accountNumberValue}</td></tr>
+				<tr><th scope="row">{c.accountName}</th><td>{c.accountNameValue}</td></tr>
+				<tr><th scope="row">{c.accountType}</th><td>{c.accountTypeValue}</td></tr>
+			</tbody>
+		</table>
 	</section>
 
 	<section class="receipt-section" aria-labelledby="receipt-heading">
@@ -117,7 +117,11 @@
 	.payment-section, .account-section { display: grid; grid-template-columns: minmax(0, .85fr) minmax(18rem, 1fr); align-items: center; gap: clamp(2rem, 7vw, 6rem); padding: clamp(2rem, 6vw, 5rem) 0; border-top: 1px solid #d8d1c3; }
 	.payment-qr { display: block; width: min(100%, 48rem); height: auto; margin: 0 auto; background: #fff; }
 	.account-section { grid-template-columns: minmax(0, .85fr) minmax(18rem, 1.15fr); }
-	.account-document { width: 100%; height: auto; border: 1px solid #d8d1c3; }
+	.account-details { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid #d8d1c3; }
+	.account-details th, .account-details td { padding: 1rem 1.1rem; border-bottom: 1px solid #d8d1c3; text-align: left; vertical-align: top; }
+	.account-details th { width: 38%; color: #536158; font-size: .85rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+	.account-details td { font-weight: 700; overflow-wrap: anywhere; }
+	.account-details tr:last-child th, .account-details tr:last-child td { border-bottom: 0; }
 	.receipt-section { max-width: 44rem; padding: clamp(2rem, 6vw, 5rem) 0; border-top: 1px solid #d8d1c3; }
 	form { display: grid; gap: .85rem; margin-top: 1.5rem; }
 	input { max-width: 100%; padding: .75rem; border: 1px solid #aeb4ae; background: #fff; }
@@ -125,5 +129,5 @@
 	button:disabled { opacity: .55; }
 	.form-error { color: #a52a2a; font-weight: 700; }
 	.back-link { display: inline-block; margin-top: 3rem; color: #172a22; font-weight: 700; text-underline-offset: .2em; }
-	@media (max-width: 720px) { .payment-section, .account-section { grid-template-columns: 1fr; gap: 1.5rem; } .payment-section { padding-top: 2rem; } .account-document { max-width: 34rem; } }
+	@media (max-width: 720px) { .payment-section, .account-section { grid-template-columns: 1fr; gap: 1.5rem; } .payment-section { padding-top: 2rem; } .account-details th, .account-details td { padding: .8rem; } }
 </style>

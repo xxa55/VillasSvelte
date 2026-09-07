@@ -178,13 +178,13 @@
 						class="zoom-trigger"
 						ondblclick={() =>
 							openZoom({
-								src: withBase('/img/pattaya-map.webp'),
+								src: withBase('/img/map.webp'),
 								alt: c.mapAlt
 							})}
 						aria-label={c.mapZoom}
 					>
 						<img
-							src={withBase('/img/pattaya-map.webp')}
+							src={withBase('/img/map.webp')}
 							alt={c.mapAlt}
 							width="1600"
 							height="1200"
@@ -211,8 +211,8 @@
 					items={catalog.villas}
 					accent="villa"
 					actionLabel={c.choose}
-					previousLabel={c.previous ?? ($language === 'zh-CN' ? '上一个' : 'Previous')}
-					nextLabel={c.next ?? ($language === 'zh-CN' ? '下一个' : 'Next')}
+					previousLabel={c.previous ?? ($language === 'zh-TW' ? '上一個' : 'Previous')}
+					nextLabel={c.next ?? ($language === 'zh-TW' ? '下一個' : 'Next')}
 				/>
 			</article>
 		</div>
