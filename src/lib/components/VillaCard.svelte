@@ -3,13 +3,7 @@
 </script>
 
 <article class="card h-100 shadow-sm border-0 villa-card">
-	{#if villa.cover}
-		<img src={villa.cover} class="card-img-top" alt={villa.name} loading="lazy" />
-	{:else}
-		<div class="card-img-placeholder" role="img" aria-label={villa.coverAlt ?? villa.name}>
-			{villa.coverAlt ?? villa.name}
-		</div>
-	{/if}
+	<img src={villa.cover} class="card-img-top" alt={villa.name} loading="lazy" />
 	<div class="card-body d-flex flex-column">
 		<div class="d-flex justify-content-between align-items-center mb-2">
 			<h3 class="h5 mb-0">{villa.name}</h3>
@@ -38,16 +32,5 @@
 	.card-img-top {
 		height: 210px;
 		object-fit: cover;
-	}
-
-	.card-img-placeholder {
-		display: grid;
-		place-items: center;
-		height: 210px;
-		background: linear-gradient(145deg, #eff6fb 0%, #d7e7f3 100%);
-		color: #526b79;
-		font-weight: 700;
-		letter-spacing: 0.08em;
-		text-transform: uppercase;
 	}
 </style>

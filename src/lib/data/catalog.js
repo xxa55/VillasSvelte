@@ -1,9 +1,9 @@
-import { asset } from '$app/paths';
+import { asset, resolve } from '$app/paths';
 
 /** @param {Parameters<typeof asset>[0]} path */
 const withBase = (path) => asset(path);
-/** @param {string} path */
-const withBaseHref = (path) => path;
+/** @param {Parameters<typeof resolve>[0]} path */
+const withBaseHref = (path) => resolve(path);
 
 export const villas = [
 	{
@@ -19,11 +19,11 @@ export const villas = [
 		description:
 			'Welcome to Villa A, a private pool villa with BBQ area, full kitchen, and comfortable rooms for families and groups.',
 		quickInfo: {
-			guests: '12',
+			guests: '10',
 			bedrooms: '5',
-			bathrooms: '7',
+			bathrooms: '6',
 			location: 'Central Pattaya',
-			booking: 'Hostex direct booking',
+			booking: 'Trip.com shared, Airbnb and Booking.com direct',
 			highlights: ['Private pool', 'BBQ area', 'Kitchen', 'Parking']
 		},
 		bookingLinks: [
@@ -56,11 +56,11 @@ export const villas = [
 		description:
 			'Villa B offers a modern group layout with private pool, billiard area, open living room, and easy hosting for larger stays.',
 		quickInfo: {
-			guests: '12',
+			guests: '10',
 			bedrooms: '5',
-			bathrooms: '7',
+			bathrooms: '6',
 			location: 'Central Pattaya',
-			booking: 'Hostex direct booking',
+			booking: 'Trip.com shared, Airbnb and Booking.com direct',
 			highlights: ['Private pool', 'Billiard area', 'Kitchen', 'Parking']
 		},
 		bookingLinks: [
@@ -79,30 +79,6 @@ export const villas = [
 			{ src: withBase('/img/villa2/billiard_ball.webp'), alt: 'Villa B billiard table' },
 			{ src: withBase('/img/villa2/ktv.webp'), alt: 'Villa B KTV room' }
 		]
-	},
-	{
-		id: 'villa-c',
-		name: 'Villa C',
-		legacyName: 'Villa 3',
-		tagline: 'Under construction',
-		features: ['Under construction'],
-		cover: '',
-		coverAlt: 'Under construction',
-		width: 1600,
-		height: 1200,
-		href: withBaseHref('/villas/villa-c'),
-		description: 'Villa C is currently under construction. More details will be available soon.',
-		underConstruction: true,
-		quickInfo: {
-			guests: 'To be announced',
-			bedrooms: 'To be announced',
-			bathrooms: 'To be announced',
-			location: 'Pattaya',
-			booking: 'Not yet available',
-			highlights: ['Under construction']
-		},
-		bookingLinks: [],
-		gallery: []
 	}
 ];
 
@@ -181,38 +157,64 @@ export const businessConnections = [
 /** @type {Record<string, any>} */
 const zhVillas = {
 	'villa-a': {
-		name: 'A棟別墅', legacyName: '1號別墅', tagline: '私人泳池、燒烤區、KTV',
-		features: ['私人泳池', '5間臥室', '廚房與洗衣設施'],
-		description: '歡迎入住 A 棟別墅。這是一棟適合家庭和多人團體入住的私人泳池別墅，配有燒烤區、設備齊全的廚房和舒適客房。',
-		location: '芭提雅市中心', booking: '人工預訂',
-		highlights: ['私人泳池', '燒烤區', '廚房', '停車位'],
-		galleryAlts: ['A 棟別墅臥室', 'A 棟別墅廚房', 'A 棟別墅浴室', 'A 棟別墅拖鞋', 'A 棟別墅餐桌', 'A 棟別墅 KTV 房']
+		name: 'A栋别墅', legacyName: '1号别墅', tagline: '私人泳池、烧烤区、KTV',
+		features: ['私人泳池', '5间卧室', '厨房与洗衣设施'],
+		description: '欢迎入住A栋别墅。这是一栋适合家庭和多人团体入住的私人泳池别墅，配有烧烤区、设备齐全的厨房和舒适客房。',
+		location: '芭提雅市中心', booking: 'Trip.com 共享房源，Airbnb 和 Booking.com 独立预订',
+		highlights: ['私人泳池', '烧烤区', '厨房', '停车位'],
+		galleryAlts: ['A栋别墅卧室', 'A栋别墅厨房', 'A栋别墅浴室', 'A栋别墅拖鞋', 'A栋别墅餐桌', 'A栋别墅KTV房']
 	},
 	'villa-b': {
-		name: 'B棟別墅', legacyName: '2號別墅', tagline: '私人泳池、用餐區、桌球',
+		name: 'B栋别墅', legacyName: '2号别墅', tagline: '私人泳池、用餐区、台球',
 		features: ['私人泳池', '5间卧室', '宽敞用餐区'],
-		description: 'B 棟別墅採用適合多人入住的現代空間佈局，配有私人泳池、桌球區、開放式客廳，方便家庭和團體聚會。',
-		location: '芭提雅市中心', booking: '人工預訂',
-		highlights: ['私人泳池', '桌球區', '廚房', '停車位'],
-		galleryAlts: ['B 棟別墅臥室', 'B 棟別墅客廳', 'B 棟別墅浴室', 'B 棟別墅停車區', 'B 棟別墅桌球桌', 'B 棟別墅 KTV 房']
+		description: 'B栋别墅采用适合多人入住的现代空间布局，配有私人泳池、台球区、开放式客厅，方便家庭和团体聚会。',
+		location: '芭提雅市中心', booking: 'Trip.com 共享房源，Airbnb 和 Booking.com 独立预订',
+		highlights: ['私人泳池', '台球区', '厨房', '停车位'],
+		galleryAlts: ['B栋别墅卧室', 'B栋别墅客厅', 'B栋别墅浴室', 'B栋别墅停车区', 'B栋别墅台球桌', 'B栋别墅KTV房']
 	}
 };
 
 /** @type {Record<string, any>} */
 const zhPlatforms = {
-	trip: { region: '共享房源', summary: '一個頁面同時展示 A 棟和 B 棟別墅。', labels: ['查看共享房源'] },
-	airbnb: { region: '獨立房源', summary: '每棟別墅都有獨立的 Airbnb 房源頁面。', labels: ['查看 A 棟別墅', '查看 B 棟別墅'] },
-	booking: { region: '獨立房源', summary: '每棟別墅都有獨立的 Booking.com 房源頁面。', labels: ['查看 A 棟別墅', '查看 B 棟別墅'] }
+	trip: { region: '共享房源', summary: '一个页面同时展示A栋和B栋别墅。', labels: ['查看共享房源'] },
+	airbnb: { region: '独立房源', summary: '每栋别墅都有独立的 Airbnb 房源页面。', labels: ['查看A栋别墅', '查看B栋别墅'] },
+	booking: { region: '独立房源', summary: '每栋别墅都有独立的 Booking.com 房源页面。', labels: ['查看A栋别墅', '查看B栋别墅'] }
+};
+
+/** @type {Record<string, any>} */
+const thVillas = {
+	'villa-a': {
+		name: 'วิลล่า A', legacyName: 'วิลล่า 1', tagline: 'สระส่วนตัว บาร์บีคิว คาราโอเกะ',
+		features: ['สระว่ายน้ำส่วนตัว', '5 ห้องนอน', 'ห้องครัวและพื้นที่ซักรีด'],
+		description: 'วิลล่า A เป็นพูลวิลล่าส่วนตัวพร้อมพื้นที่บาร์บีคิว ห้องครัวครบครัน และห้องพักสะดวกสบาย เหมาะสำหรับครอบครัวและกลุ่มเพื่อน',
+		location: 'ใจกลางพัทยา', booking: 'Trip.com แบบรวม และ Airbnb กับ Booking.com แบบแยกวิลล่า',
+		highlights: ['สระว่ายน้ำส่วนตัว', 'พื้นที่บาร์บีคิว', 'ห้องครัว', 'ที่จอดรถ'],
+		galleryAlts: ['ห้องนอนวิลล่า A', 'ห้องครัววิลล่า A', 'ห้องน้ำวิลล่า A', 'รองเท้าแตะวิลล่า A', 'โต๊ะวิลล่า A', 'ห้องคาราโอเกะวิลล่า A']
+	},
+	'villa-b': {
+		name: 'วิลล่า B', legacyName: 'วิลล่า 2', tagline: 'สระส่วนตัว พื้นที่รับประทานอาหาร โต๊ะพูล',
+		features: ['สระว่ายน้ำส่วนตัว', '5 ห้องนอน', 'พื้นที่รับประทานอาหารขนาดใหญ่'],
+		description: 'วิลล่า B มีพื้นที่ทันสมัยสำหรับการเข้าพักเป็นกลุ่ม พร้อมสระส่วนตัว โต๊ะพูล ห้องนั่งเล่นแบบเปิด และพื้นที่สังสรรค์ที่สะดวกสบาย',
+		location: 'ใจกลางพัทยา', booking: 'Trip.com แบบรวม และ Airbnb กับ Booking.com แบบแยกวิลล่า',
+		highlights: ['สระว่ายน้ำส่วนตัว', 'โต๊ะพูล', 'ห้องครัว', 'ที่จอดรถ'],
+		galleryAlts: ['ห้องนอนวิลล่า B', 'ห้องนั่งเล่นวิลล่า B', 'ห้องน้ำวิลล่า B', 'ที่จอดรถวิลล่า B', 'โต๊ะพูลวิลล่า B', 'ห้องคาราโอเกะวิลล่า B']
+	}
+};
+
+/** @type {Record<string, any>} */
+const thPlatforms = {
+	trip: { region: 'รายการรวม', summary: 'ลิงก์เดียวสำหรับวิลล่า A และวิลล่า B', labels: ['ดูรายการรวม'] },
+	airbnb: { region: 'รายการแยก', summary: 'แต่ละวิลล่ามีหน้ารายการ Airbnb แยกกัน', labels: ['ดูวิลล่า A', 'ดูวิลล่า B'] },
+	booking: { region: 'รายการแยก', summary: 'แต่ละวิลล่ามีหน้ารายการ Booking.com แยกกัน', labels: ['ดูวิลล่า A', 'ดูวิลล่า B'] }
 };
 
 export function getCatalog(locale = 'en') {
-	if (locale !== 'zh-TW') return { villas, platforms, businessConnections };
-	const villaTranslations = zhVillas;
-	const platformTranslations = zhPlatforms;
+	if (locale !== 'zh-CN' && locale !== 'th') return { villas, platforms, businessConnections };
+	const villaTranslations = locale === 'th' ? thVillas : zhVillas;
+	const platformTranslations = locale === 'th' ? thPlatforms : zhPlatforms;
 
 	const localizedVillas = villas.map((villa) => {
 		const translated = villaTranslations[villa.id];
-		if (!translated) return villa;
 		return {
 			...villa,
 			name: translated.name,
@@ -226,7 +228,7 @@ export function getCatalog(locale = 'en') {
 				booking: translated.booking,
 				highlights: translated.highlights
 			},
-			bookingLinks: villa.bookingLinks.map((link) => ({ ...link, label: link.label.replace('Book on', '前往') })),
+			bookingLinks: villa.bookingLinks.map((link) => ({ ...link, label: link.label.replace('Book on', locale === 'th' ? 'จองผ่าน' : '前往') })),
 			gallery: villa.gallery.map((image, index) => ({ ...image, alt: translated.galleryAlts[index] }))
 		};
 	});
@@ -237,7 +239,7 @@ export function getCatalog(locale = 'en') {
 			...platform,
 			region: translated.region,
 			summary: translated.summary,
-			logoAlt: `${platform.name} 标志`,
+			logoAlt: `${platform.name} ${locale === 'th' ? 'โลโก้' : '标志'}`,
 			links: platform.links.map((link, index) => ({
 				...link,
 				label: translated.labels[index],
@@ -248,9 +250,9 @@ export function getCatalog(locale = 'en') {
 
 	const localizedConnections = businessConnections.map((item) => ({
 		...item,
-		from: item.from.replace('Villa A', 'A棟別墅').replace('Villa B', 'B棟別墅'),
-		to: item.to.replace('Villa A', 'A棟別墅').replace('Villa B', 'B棟別墅'),
-		note: item.note === 'Shared listing' ? '共享房源' : '独立房源'
+		from: item.from.replace('Villa A', locale === 'th' ? 'วิลล่า A' : 'A栋别墅').replace('Villa B', locale === 'th' ? 'วิลล่า B' : 'B栋别墅'),
+		to: item.to.replace('Villa A', locale === 'th' ? 'วิลล่า A' : 'A栋别墅').replace('Villa B', locale === 'th' ? 'วิลล่า B' : 'B栋别墅'),
+		note: item.note === 'Shared listing' ? (locale === 'th' ? 'รายการรวม' : '共享房源') : (locale === 'th' ? 'รายการแยก' : '独立房源')
 	}));
 
 	return { villas: localizedVillas, platforms: localizedPlatforms, businessConnections: localizedConnections };

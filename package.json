@@ -11,14 +11,12 @@
 		"images:clean-jpg": "node ./scripts/clean-unused-jpg.mjs",
 		"prepare": "svelte-kit sync || echo ''",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
-		"test": "node --test",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-static": "^3.0.10",
 		"@sveltejs/kit": "^2.63.0",
 		"@sveltejs/vite-plugin-svelte": "^7.1.2",
-		"@types/node": "^26.4.1",
 		"sharp": "^0.34.4",
 		"svelte": "^5.56.1",
 		"svelte-check": "^4.6.0",
@@ -26,8 +24,6 @@
 		"vite": "^8.0.16"
 	},
 	"dependencies": {
-		"@supabase/ssr": "^0.12.6",
-		"@supabase/supabase-js": "^2.115.0",
 		"bootstrap": "^5.3.8",
 		"bootstrap-icons": "^1.13.1"
 	}

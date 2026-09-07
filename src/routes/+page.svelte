@@ -178,13 +178,13 @@
 						class="zoom-trigger"
 						ondblclick={() =>
 							openZoom({
-								src: withBase('/img/map.webp'),
+								src: withBase('/img/pattaya-map.webp'),
 								alt: c.mapAlt
 							})}
 						aria-label={c.mapZoom}
 					>
 						<img
-							src={withBase('/img/map.webp')}
+							src={withBase('/img/pattaya-map.webp')}
 							alt={c.mapAlt}
 							width="1600"
 							height="1200"
@@ -211,8 +211,8 @@
 					items={catalog.villas}
 					accent="villa"
 					actionLabel={c.choose}
-					previousLabel={c.previous ?? ($language === 'zh-TW' ? '上一個' : 'Previous')}
-					nextLabel={c.next ?? ($language === 'zh-TW' ? '下一個' : 'Next')}
+					previousLabel={c.previous ?? ($language === 'zh-CN' ? '上一个' : 'Previous')}
+					nextLabel={c.next ?? ($language === 'zh-CN' ? '下一个' : 'Next')}
 				/>
 			</article>
 		</div>
@@ -273,6 +273,15 @@
 						<figcaption>WeChat</figcaption>
 					</figure>
 				</div>
+				<nav class="platform-links mt-3" aria-label={c.platforms}>
+					{#each catalog.platforms as platform}
+						<a class="platform-mini-card" href={`${resolve('/platforms')}#platform-${platform.id}`}>
+							<img src={platform.logo} alt="" width="28" height="28" loading="lazy" />
+							<span>{platform.name}</span>
+							<i class="bi bi-chevron-right" aria-hidden="true"></i>
+						</a>
+					{/each}
+				</nav>
 			</section>
 		</div>
 	</div>
@@ -301,8 +310,7 @@
 	}
 
 	.site-header {
-		background: #f7f4ea;
-		border-bottom: 1px solid rgb(22 44 58 / 12%);
+		background: linear-gradient(180deg, rgb(255 255 255 / 78%) 0%, transparent 100%);
 	}
 
 	.navbar-brand {
@@ -323,8 +331,11 @@
 	}
 
 	.hero-copy {
-		background: #fff;
-		border: 1px solid rgb(19 48 63 / 18%);
+		background:
+			radial-gradient(circle at 15% 18%, rgb(222 239 251 / 70%), transparent 28%),
+			linear-gradient(145deg, rgb(255 255 255 / 95%), rgb(248 244 239 / 95%));
+		border: 1px solid rgb(19 48 63 / 10%);
+		box-shadow: 0 1.25rem 2.5rem rgb(18 37 48 / 10%);
 	}
 
 	.hero-kicker {
@@ -337,10 +348,11 @@
 	}
 
 	.hero-video {
-		border-radius: 0.25rem;
+		border-radius: 1rem;
 		overflow: hidden;
-		border: 1px solid rgb(19 48 63 / 18%);
-		background: #fff;
+		border: 1px solid rgb(19 48 63 / 12%);
+		box-shadow: 0 1rem 2rem rgb(18 37 48 / 10%);
+		background: rgb(255 255 255 / 70%);
 	}
 
 	.hero-video-player {
@@ -368,8 +380,9 @@
 	.hero-figure {
 		margin: 0;
 		min-height: 12rem;
-		border-radius: 0.25rem;
+		border-radius: 1.1rem;
 		overflow: hidden;
+		box-shadow: 0 1rem 2rem rgb(18 37 48 / 10%);
 	}
 
 	.hero-grid-wide {
@@ -405,8 +418,9 @@
 
 	.amenity-card,
 	.map-card {
-		background: #fff;
-		border: 1px solid rgb(19 48 63 / 16%);
+		background: rgb(255 255 255 / 80%);
+		border: 1px solid rgb(19 48 63 / 10%);
+		box-shadow: 0 1rem 2rem rgb(18 37 48 / 8%);
 	}
 
 	.amenity-icon {
@@ -419,7 +433,7 @@
 
 	.map-card {
 		margin: 0;
-		border-radius: 0.25rem;
+		border-radius: 1.1rem;
 		overflow: hidden;
 	}
 
@@ -511,6 +525,56 @@
 		margin-top: 0.5rem;
 		font-size: 0.9rem;
 		text-align: center;
+	}
+
+	.platform-links {
+		display: grid;
+		gap: 0.45rem;
+		max-width: 18rem;
+		margin-inline: auto;
+	}
+
+	.platform-mini-card {
+		display: grid;
+		grid-template-columns: 1.75rem 1fr auto;
+		align-items: center;
+		gap: 0.6rem;
+		padding: 0.48rem 0.6rem;
+		border: 1px solid rgb(19 48 63 / 10%);
+		border-radius: 0.65rem;
+		background: rgb(255 255 255 / 48%);
+		color: #526b79;
+		font-size: 0.84rem;
+		font-weight: 600;
+		text-decoration: none;
+		transition: border-color 150ms ease, background-color 150ms ease, transform 150ms ease;
+	}
+
+	.platform-mini-card img {
+		width: 1.75rem;
+		height: 1.75rem;
+		border-radius: 0.4rem;
+		object-fit: contain;
+		background: #fff;
+	}
+
+	.platform-mini-card i {
+		font-size: 0.7rem;
+		opacity: 0.55;
+	}
+
+	.platform-mini-card:hover,
+	.platform-mini-card:focus-visible {
+		color: #1f5d7f;
+		border-color: rgb(31 93 127 / 28%);
+		background: rgb(255 255 255 / 82%);
+		transform: translateY(-1px);
+	}
+
+	@media (min-width: 992px) {
+		.platform-links {
+			margin-inline: 0;
+		}
 	}
 
 	address p {

@@ -20,11 +20,6 @@ debug.log
 !.env.example
 !.env.test
 
-# Local certificates and private keys
-*.pem
-*.crt
-*.key
-
 # Vite
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
