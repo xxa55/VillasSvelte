@@ -2,6 +2,8 @@ import { fail, redirect } from '@sveltejs/kit';
 import { sendWelcomeEmail } from '$lib/server/email.js';
 import { safeReturnTo } from '$lib/navigation.js';
 
+export const prerender = false;
+
 /** @type {import('./$types').Actions} */
 export const actions = {
 	google: async ({ locals, url }) => {

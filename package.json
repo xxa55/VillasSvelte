@@ -15,6 +15,7 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch"
 	},
 	"devDependencies": {
+		"@sveltejs/adapter-static": "^3.0.10",
 		"@sveltejs/kit": "^2.63.0",
 		"@sveltejs/vite-plugin-svelte": "^7.1.2",
 		"@types/node": "^26.4.1",
@@ -27,7 +28,6 @@
 	"dependencies": {
 		"@supabase/ssr": "^0.12.6",
 		"@supabase/supabase-js": "^2.115.0",
-		"@sveltejs/adapter-vercel": "^6.3.4",
 		"bootstrap": "^5.3.8",
 		"bootstrap-icons": "^1.13.1"
 	}

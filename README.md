@@ -34,11 +34,11 @@ The sign-in page supports Google OAuth through Supabase. In Supabase, open **Aut
 https://twfnvrdkwverjwckntvi.supabase.co/auth/v1/callback
 ```
 
-In Supabase **Authentication > URL Configuration**, add the local URL and the Vercel deployment URL to the redirect allow list, including `https://YOUR-VERCEL-PROJECT.vercel.app/auth/callback`.
+In Supabase **Authentication > URL Configuration**, add the local URL and the GitHub Pages URL to the redirect allow list, including `https://YOUR-DOMAIN/auth/callback`.
 
-## Deploying to Vercel
+## Deploying to GitHub Pages
 
-Import the GitHub repository, add every variable from `.env.example`, and deploy. The project uses the Vercel adapter, so the API routes remain server-side. Set `PUBLIC_SITE_URL` to the final HTTPS origin. Vercel provisions and renews the HTTPS certificate for a connected domain; certificate files should never be committed to this repository.
+Push to `main` to run the GitHub Pages workflow. This repository is the static public-site copy; server-side login, booking, payment, and admin actions belong in the Vercel repository. Set `PUBLIC_SITE_URL` to the final HTTPS origin.
 
 ## Verification
 
